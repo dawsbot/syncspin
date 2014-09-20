@@ -33,20 +33,19 @@ angular.module('syncspin', [
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.open = function() {
-        $scope.showModal = true;
+      $scope.showModal = true;
     }
     $scope.ok = function() {
-        $scope.showModal = false;
+      $scope.showModal = false;
     }
     $scope.ok = function() {
-        $scope.showModal = false;
+      $scope.showModal = false;
     }
     $scope.createRoom = function() {
-      var roomId = 'Loon';
+      var roomId = colors[Math.floor(Math.random() * colors.length)]+'-'+landforms[Math.floor(Math.random() * landforms.length)]
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
-      var userName = 'Loon';
       var roomId = 'Loon';
       $location.url('/' + roomId);
     };
@@ -66,6 +65,15 @@ angular.module('syncspin', [
           songs[i].votes += vote.change;
         }
       }
+      $scope.$apply();
+    });
+
+    socket.on('count', function(roomCount) {
+      if ($scope.room.id !== roomCount.room) {
+        console.log($scope.room.id + ' !== ' + roomCount.room);
+        return;
+      }
+      $scope.room.count = roomCount.count;
       $scope.$apply();
     });
   })
@@ -90,6 +98,9 @@ angular.module('syncspin', [
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
+      socket.emit('join', {
+        id: $scope.room.id
+      });
     });
 
     socket.on('vote', function(vote) {
