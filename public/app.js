@@ -11,6 +11,7 @@ var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
 
 angular.module('syncspin', [
   'ui.router',
+  'ui.bootstrap'
 ])
   .config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);

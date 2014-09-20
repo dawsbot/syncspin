@@ -7,22 +7,13 @@
   <div ng-if="room.songs.length == 0">
     <p>You don't have any songs.</p>
     <h2>I'm</h2>
-    <select ng-model="sentence.place">
-      <option ng-repeat="place in options.places">{{place}}</option>
-    </select>
+    <input id="sentencePlace" class="form-control sentence-part" type="text" ng-model="sentence.place" typeahead="place for place in options.places" />
     <h2>and feel like</h2>
-    <select ng-model="sentence.activity">
-      <option ng-repeat="activity in options.activities">{{activity}}</option>
-    </select>
+    <input id="sentenceActivity" class="form-control sentence-part" type="text" ng-model="sentence.activity" typeahead="activity for activity in options.activities" />
     <h2>with</h2>
-    <select ng-model="sentence.people">
-      <option ng-repeat="people in options.people">{{people}}</option>
-    </select>
+    <input id="sentencePeople" class="form-control sentence-part" type="text" ng-model="sentence.people" typeahead="people for people in options.people" />
     <h2>to</h2>
-    <select ng-model="sentence.genre">
-      <option ng-repeat="genre in options.genres">{{genre}}</option>
-    </select>
-    </select>
+    <input id="sentenceGenre" class="form-control sentence-part" type="text" ng-model="sentence.genre" typeahead="genre for genre in options.genres" />
   </div>
   <div ng-if="room.songs.length != 0">
     <div class="row">
