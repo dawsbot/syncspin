@@ -12,17 +12,17 @@ angular.module('syncspin', [
     $stateProvider
       .state('create', {
         url: '/create',
-        templateUrl: 'templates/create.html',
+        templateUrl: '/templates/create.html',
         controller: 'CreateCtrl'
       })
       .state('host', {
         url: '/:roomId/host',
-        templateUrl: 'templates/host.html',
+        templateUrl: '/templates/host.html',
         controller: 'HostCtrl'
       })
       .state('vote', {
-        url: '/:roomId/',
-        templateUrl: 'templates/vote.html',
+        url: '/{roomId:[\\w\\-]+}',
+        templateUrl: '/templates/vote.html',
         controller: 'VoteCtrl'
       });
     $urlRouterProvider.otherwise('/create');
