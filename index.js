@@ -45,7 +45,7 @@ app.route('/api/rooms').get(function(req, res) {
 app.use('/', express.static('./public'));
 
 app.route('/*').get(function(req, res) {
-  res.sendFile('public/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 io.on('connection', function(socket) {
