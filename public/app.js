@@ -19,11 +19,6 @@ angular.module('syncspin', [
         templateUrl: 'templates/host.html',
         controller: 'HostCtrl'
       })
-      .state('rooms', {
-        url: '/rooms',
-        templateUrl: 'templates/rooms.html',
-        controller: 'RoomsCtrl'
-      })
       .state('vote', {
         url: '/:roomId',
         templateUrl: 'templates/vote.html',
@@ -46,7 +41,12 @@ angular.module('syncspin', [
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
-      var roomId = 'Loon';
+      $http.get('/api/' + $stateParams.roomId).success(function(data) {
+        var roomsList = data;
+      });
+      var roomId = $scope.text;
+      if roomId 
+      console.log(roomId);
       $location.url('/' + roomId);
     };
   })
