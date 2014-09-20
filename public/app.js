@@ -7,7 +7,7 @@ var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
 angular.module('syncspin', [
   'ui.router',
 ])
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('create', {
         url: '/create',
@@ -25,6 +25,7 @@ angular.module('syncspin', [
         controller: 'VoteCtrl'
       });
     $urlRouterProvider.otherwise('/create');
+    $locationProvider.setHtml5Mode(true);
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.open = function() {
