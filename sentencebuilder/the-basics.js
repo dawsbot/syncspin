@@ -23,15 +23,7 @@ $(document).ready(function(){
     };
   };
 
-  var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-    'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-    'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-    'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  var places = ['in the car', 'out and about', 'at my computer', 'in the shower', 'at a party', 'in class', 'at home', 'at work', 'fashionably late', 'in bed', 'in the air', 'in the club', 'slacking off', 'bored as hell', 'thawing out', 'on a rooftop', 'in my underwear', 'on the subway', 'at the gym'
   ];
 
   $('#the-basics .typeahead').typeahead({
@@ -40,8 +32,8 @@ $(document).ready(function(){
     minLength: 1
   },
   {
-    name: 'states',
+    name: 'places',
     displayKey: 'value',
-    source: substringMatcher(states)
+    source: substringMatcher(places)
   });
 });
