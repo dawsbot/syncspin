@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-  <title>SyncSpin</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>SyncSpin Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -47,17 +48,17 @@
     bam.on("error", handleError);
     //bam.on("ended", handleEnded);
     function handleReady(value) { 
-    bam.clientId = "ytuyn29p9e5b4udwtgwmughe";
-    var token = getJsonFromUrl()
-    console.log(token.access_token)
-    bam.authentication = {
-        access_token:token.access_token, 
+      bam.clientId = "ytuyn29p9e5b4udwtgwmughe";
+      window.token = getJsonFromUrl().access_token;
+      //console.log(window.token)
+      bam.authentication = {
+        access_token:window.token, 
         user_id:"liam.t.sargent"
-    };
-    bam.identifier = "tr82702885";
-    bam.autoplay = true;
-    bam.load();
-};
+      };
+      bam.identifier = "tr82702885";
+      bam.autoplay = true;
+      bam.load();
+      };
 function handleError(value) {
     console.log("Error: " + value);
     switch(value){
@@ -85,6 +86,48 @@ function handleError(value) {
         break;
     }
 };
+function getUserID(){
+  var token = getJsonFromUrl().access_token;
+  console.log(token);
+  UID = $.ajax({url:'https://partner.api.beatsmusic.com/v1/api/me',
+         type: "GET",
+         headers: {Authorization: 'Bearer '+ token},
+         dataType:'json',
+          success: function (data) {
+            UID = data.result.user_context;
+            console.log(data.result.user_context);
+          }
+       });
+  return UID;
+
+}
+console.log(getUserID())
+
+var playlistHolder = {
+    playedSongs:[],
+    queuedSongs:[],
+    initPlaylist: function(user_id,place,activity,people,genre,timezone){
+      var token = getJsonFromUrl().access_token;
+      $.ajax({
+        type: "POST",
+        url: 'https://partner.api.beatsmusic.com/v1/api/users/'+user_id+'/recs/the_sentence?place='+place+'&activity='
+        +activity+'&people='+people+'&genre='+genre+'&time_zone='+timezone+'&access_token='+token,
+        /*data: {'place':place,
+               'activity':activity,
+               'people':people,
+               'genre':genre,
+               'time_zone':timezone,
+               'access_token':window.token
+              },*/
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        }
+      });
+    },
+}; 
+
+playlistHolder.initPlaylist(getUserID(),'178','61','131','32','-0500')
 
 function loadNextSong(trackID) {
     bam.identifier=trackID;
