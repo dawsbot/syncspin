@@ -8,7 +8,8 @@ gulp.task('inject', function() {
       './bower_components/jquery/dist/jquery.min.js',
       './bower_components/angular/angular.min.js',
       './bower_components/bootstrap/dist/js/bootstrap.min.js',
-      './bower_components/angular-ui-router/release/angular-ui-router.min.js'
+      './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      './bower_components/socket.io-client/socket.io.js'
     ]
   };
 
