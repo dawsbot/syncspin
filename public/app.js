@@ -22,4 +22,30 @@ angular.module('syncspin', [
       artwork: 'http://tonefunk.com/wp-content/uploads/2014/03/UMG_cvrart_00602537511556_01_RGB72_1500x1500_13UAAIM59985.170x170-75.jpg',
       votes: -4
     }];
+
+    $scope.upvoteSong = function(song) {
+      if (song.vote === 1) {
+        song.votes--;
+        song.vote = 0;
+      } else if (song.vote === -1) {
+        song.votes += 2;
+        song.vote = 1;
+      } else {
+        song.votes++;
+        song.vote = 1;
+      }
+    };
+
+    $scope.downvoteSong = function(song) {
+      if (song.vote === -1) {
+        song.votes++;
+        song.vote = 0;
+      } else if (song.vote === 1) {
+        song.votes -= 2;
+        song.vote = -1;
+      } else {
+        song.votes--;
+        song.vote = -1;
+      }
+    };
   });

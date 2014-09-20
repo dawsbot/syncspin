@@ -10,13 +10,13 @@
       </div>
       <div class="col-xs-3 votes">
         <div class="inline">
-          <i class="fa fa-sort-asc up-arrow"></i>
+          <i class="fa fa-sort-asc up-arrow" ng-class="(song.vote == 1) ? 'up-arrow-selected' : ''" ng-click="upvoteSong(song)"></i>
         </div>
         <div class="inline">
           <p class="votes-count">{{song.votes}}</p>
         </div>
         <div class="inline-last">
-          <i class="fa fa-sort-desc down-arrow"></i>
+          <i class="fa fa-sort-desc down-arrow" ng-class="(song.vote == -1) ? 'down-arrow-selected' : ''" ng-click="downvoteSong(song)"></i>
         </div>
       </div>
     </div>

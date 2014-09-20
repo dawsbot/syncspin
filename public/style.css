@@ -1,32 +1,33 @@
 .song {
   margin: 10px 0px;
 }
-
 .album-artwork {
   height: auto;
   width: 100%;
 }
-
 .votes {
   font-size: 20px;
 }
-
 .inline {
   float: left;
   margin-right: 10px;
   padding-top: 20%;
 }
-
 .inline-last {
   float: left;
   padding-top: 20%;
 }
-
 .up-arrow {
+  color: #c6c6c6;
   margin-top: 9px;
 }
-
 .down-arrow {
+  color: #c6c6c6;
   margin-top: -9px;
 }
-
+.up-arrow-selected {
+  color: #ff8b60;
+}
+.down-arrow-selected {
+  color: #9494ff;
+}
