@@ -6,6 +6,23 @@
   </div>
   <div ng-if="room.songs.length == 0">
     <p>You don't have any songs.</p>
+    <h2>I'm</h2>
+    <select ng-model="sentence.place">
+      <option ng-repeat="place in options.places">{{place}}</option>
+    </select>
+    <h2>and feel like</h2>
+    <select ng-model="sentence.activity">
+      <option ng-repeat="activity in options.activities">{{activity}}</option>
+    </select>
+    <h2>with</h2>
+    <select ng-model="sentence.people">
+      <option ng-repeat="people in options.people">{{people}}</option>
+    </select>
+    <h2>to</h2>
+    <select ng-model="sentence.genre">
+      <option ng-repeat="genre in options.genres">{{genre}}</option>
+    </select>
+    </select>
   </div>
   <div ng-if="room.songs.length != 0">
     <div class="row">
