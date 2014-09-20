@@ -28,15 +28,6 @@ angular.module('syncspin', [
     $locationProvider.setHtml5Mode(true);
   })
   .controller('CreateCtrl', function($scope, $location) {
-    $scope.open = function() {
-      $scope.showModal = true;
-    }
-    $scope.ok = function() {
-      $scope.showModal = false;
-    }
-    $scope.ok = function() {
-      $scope.showModal = false;
-    }
     $scope.createRoom = function() {
       var roomId = colors[Math.floor(Math.random() * colors.length)]+'-'+landforms[Math.floor(Math.random() * landforms.length)]
       $location.url('/' + roomId + '/host');
