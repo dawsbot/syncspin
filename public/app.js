@@ -1,6 +1,9 @@
 // Socket
 var socket = io('http://localhost');
 
+// Ghetto
+var uuid = Math.floor(Math.random() * 1000000);
+
 angular.module('syncspin', [
   'ui.router'
 ])
@@ -45,18 +48,23 @@ angular.module('syncspin', [
   })
   .controller('VoteCtrl', function($scope, $stateParams) {
     socket.on('vote', function(vote) {
+      if (vote.uuid === uuid) {
+        return;
+      }
       for (var i = 0; i < $scope.songs.length; i++) {
         if ($scope.songs[i].id === vote.id) {
           $scope.songs[i].votes += vote.change;
         }
       }
+      $scope.$apply();
     });
 
     function changeVotes(song, amt) {
       song.votes += amt;
       socket.emit('vote', {
         id: song.id,
-        change: -2
+        change: amt,
+        uuid: uuid
       });
     }
 
