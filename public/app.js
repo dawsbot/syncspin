@@ -43,6 +43,7 @@ angular.module('syncspin', [
       $scope.room = data;
       $scope.room.count = 0;
     });
+    vizInit();
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {
         return;
@@ -54,6 +55,7 @@ angular.module('syncspin', [
         }
       }
       $scope.$apply();
+      
     });
 
     socket.on('count', function(roomCount) {
