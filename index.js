@@ -42,7 +42,11 @@ app.route('/api/rooms').get(function(req, res) {
   res.json(rooms);
 });
 
-app.use(express.static('./public'));
+app.use('/', express.static('./public'));
+
+app.route('/*').get(function(req, res) {
+  res.sendFile('public/index.html');
+});
 
 io.on('connection', function(socket) {
 

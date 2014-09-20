@@ -7,7 +7,8 @@ var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
 angular.module('syncspin', [
   'ui.router',
 ])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+    $locationProvider.html5Mode(true);
     $stateProvider
       .state('create', {
         url: '/create',
@@ -25,7 +26,6 @@ angular.module('syncspin', [
         controller: 'VoteCtrl'
       });
     $urlRouterProvider.otherwise('/create');
-    $locationProvider.html5Mode(true);
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
@@ -41,6 +41,7 @@ angular.module('syncspin', [
     };
   })
   .controller('HostCtrl', function($scope, $stateParams, $http) {
+    console.log('asdf');
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
