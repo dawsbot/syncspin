@@ -2,6 +2,7 @@
   "name": "syncspin",
   "description": "syncs the spin",
   "version": "0.1.0",
+  "main": "index",
   "dependencies": {
     "express": "^4.9.4",
     "lodash": "^2.4.1",
