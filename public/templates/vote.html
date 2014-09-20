@@ -1,5 +1,5 @@
 <div class="container">
-  <div ng-repeat="song in songs">
+  <div ng-repeat="song in songs | orderBy:'-votes'">
     <div class="row song">
       <div class="col-xs-3 col-md-1">
         <img class="album-artwork" ng-src="{{song.artwork}}">
