@@ -1,3 +1,6 @@
+// Socket
+var socket = io('http://localhost');
+
 angular.module('syncspin', [
   'ui.router'
 ])
@@ -41,13 +44,22 @@ angular.module('syncspin', [
     $scope.roomId = $stateParams.roomId;
   })
   .controller('VoteCtrl', function($scope, $stateParams) {
-    socket.on('upvote', function(song) {
+    socket.on('vote', function(vote) {
       for (var i = 0; i < $scope.songs.length; i++) {
-        if ($scope.songs[i].id === song.id) {
-          $scope.songs[i].votes++;
+        if ($scope.songs[i].id === vote.id) {
+          $scope.songs[i].votes += vote.change;
         }
       }
     });
+
+    function changeVotes(song, amt) {
+      song.votes += amt;
+      socket.emit('vote', {
+        id: song.id,
+        change: -2
+      });
+    }
+
     $scope.songs = [{
       id: 'asdf',
       name: 'Recess',
@@ -64,29 +76,27 @@ angular.module('syncspin', [
 
     $scope.upvoteSong = function(song) {
       if (song.vote === 1) {
-        song.votes--;
+        changeVotes(song, -1);
         song.vote = 0;
       } else if (song.vote === -1) {
-        song.votes += 2;
+        changeVotes(song, 2);
         song.vote = 1;
       } else {
-        song.votes++;
+        changeVotes(song, 1);
         song.vote = 1;
       }
-      socket.emit('upvote', song);
     };
 
     $scope.downvoteSong = function(song) {
       if (song.vote === -1) {
-        song.votes++;
+        changeVotes(song, 1);
         song.vote = 0;
       } else if (song.vote === 1) {
-        song.votes -= 2;
+        changeVotes(song, -2);
         song.vote = -1;
       } else {
-        song.votes--;
+        changeVotes(song, -1);
         song.vote = -1;
       }
-      socket.emit('downvote', song);
     };
   });
