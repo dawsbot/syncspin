@@ -5,19 +5,19 @@
       <div class="col-xs-3 col-md-1">
         <img class="album-artwork" ng-src="{{song.artwork}}">
       </div>
-      <div class="col-xs-6 col-md-3">
+      <div class="col-xs-5 col-md-3">
         <p class="song-name">{{song.name}}</p>
         <p class="song-artist">{{song.artist}}</p>
       </div>
-      <div class="col-xs-3 votes">
+      <div class="col-xs-4 votes">
         <div class="inline">
-          <i class="fa fa-sort-asc up-arrow" ng-class="(song.vote == 1) ? 'up-arrow-selected' : ''" ng-click="upvoteSong(song)"></i>
+          <i class="fa fa-sort-asc fa-3x up-arrow" ng-class="(song.vote == 1) ? 'up-arrow-selected' : ''" ng-click="upvoteSong(song)"></i>
         </div>
         <div class="inline">
           <p class="votes-count">{{song.votes}}</p>
         </div>
         <div class="inline-last">
-          <i class="fa fa-sort-desc down-arrow" ng-class="(song.vote == -1) ? 'down-arrow-selected' : ''" ng-click="downvoteSong(song)"></i>
+          <i class="fa fa-sort-desc fa-3x down-arrow" ng-class="(song.vote == -1) ? 'down-arrow-selected' : ''" ng-click="downvoteSong(song)"></i>
         </div>
       </div>
     </div>

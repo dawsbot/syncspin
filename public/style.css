@@ -8,9 +8,6 @@
   height: auto;
   width: 100%;
 }
-.votes {
-  font-size: 20px;
-}
 .inline {
   float: left;
   margin-right: 10px;
@@ -36,4 +33,7 @@
 }
 .song-queue-header {
   margin-top: 10px;
+}
+.votes-count {
+  font-size: 20px;
 }
