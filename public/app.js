@@ -4,9 +4,6 @@ var socket = io('http://localhost');
 // Ghetto
 var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
 
-
-
-
 angular.module('syncspin', [
   'ui.router',
 ])
@@ -45,11 +42,10 @@ angular.module('syncspin', [
         $scope.showModal = false;
     }
     $scope.createRoom = function() {
-      var roomId = 'Loon';
+      var roomId = animals[Math.floor(Math.random() * animals.length)]; // This is not actually a uuid]
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
-      var userName = 'Loon';
       var roomId = 'Loon';
       $location.url('/' + roomId);
     };
