@@ -45,8 +45,6 @@ angular.module('syncspin', [
         var roomsList = data;
       });
       var roomId = $scope.text;
-      if roomId 
-      console.log(roomId);
       $location.url('/' + roomId);
     };
   })
