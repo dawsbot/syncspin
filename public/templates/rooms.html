@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">Open Rooms</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h2 class="page-header song-queue-header">Song Queue</h2>
+      <div ng-repeat="room in rooms | orderBy:'">
+        <div class="row song">
+          <div class="col-md-4">
+            <img class="album-artwork" ng-src="{{song.artwork}}">
+          </div>
+          <div class="col-md-6">
+            <p class="song-name">{{song.name}}</p>
+            <p class="song-artist">{{song.artist}}</p>
+          </div>
+          <div class="col-md-2 votes">
+            <p class="votes-count">{{song.votes}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      Asdf
+    </div>
+  </div>
+</div>

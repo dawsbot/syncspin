@@ -12,6 +12,7 @@ function getRoom(roomId) {
   var room = rooms[roomId];
   if (!room) {
     room = rooms[roomId] = {
+      users: [],
       id: roomId,
       songs: [{
         id: 'asdf',
@@ -34,6 +35,9 @@ function getRoom(roomId) {
 // This route populates the initial data of a room.
 app.route('/api/:roomId').get(function(req, res) {
   res.json(getRoom(req.params.roomId));
+});
+app.route('/api/rooms').get(function(req, res) {
+  res.json(rooms);
 });
 
 app.use('/', express.static('./public'));

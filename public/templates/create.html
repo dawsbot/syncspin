@@ -4,7 +4,21 @@
       <h1 class="page-header">SyncSpin</h1>
       <button class="btn btn-primary" ng-click="createRoom()">Create a Room</button>
       <p>or</p>
-      <button class="btn btn-success">Join a Room</button>
-    </div>
+      <button class="btn btn-success" ng-click="joinRoom()">Join a Room</button>
+      <button class="btn" ng-click="open()">Open Modal</button>
+      <div modal="showModal" close="cancel()">
+          <div class="modal-header">
+              <h4>Modal Dialog</h4>
+              </div>
+              <div class="modal-body">
+                  <p>Example paragraph with some text.</p>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-success" ng-click="ok()">Okay</button>
+                  <button class="btn" ng-click="cancel()">Cancel</button>
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

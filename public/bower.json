@@ -6,6 +6,9 @@
     "angular": "~1.2.25",
     "jquery": "~2.1.1",
     "angular-ui-router": "~0.2.11",
-    "socket.io-client": "~1.1.0"
+    "socket.io-client": "~1.1.0",
+    "angular-ui": "~0.4.0",
+    "angular-ui-bootstrap": "~0.11.0",
+    "angular-bootstrap": "~0.11.0"
   }
 }
