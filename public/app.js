@@ -41,12 +41,21 @@ angular.module('syncspin', [
     $scope.roomId = $stateParams.roomId;
   })
   .controller('VoteCtrl', function($scope, $stateParams) {
+      socket.on('upvote', function(song){
+          for (var i = 0; i < $scope.songs.length; i++) {
+              if ($scope.songs[i].id === song.id) {
+                  $scope.songs[i].votes++;
+              }
+          }
+      });
     $scope.songs = [{
+      id: 'asdf',
       name: 'Recess',
       artist: 'Skrillex',
       artwork: 'http://upload.wikimedia.org/wikipedia/en/archive/5/52/20140314115000!RecessSkrillex.jpg',
       votes: 0
     }, {
+      id: 'asdff',
       name: 'Play it Again',
       artist: 'Luke Bryan',
       artwork: 'http://tonefunk.com/wp-content/uploads/2014/03/UMG_cvrart_00602537511556_01_RGB72_1500x1500_13UAAIM59985.170x170-75.jpg',
