@@ -48,14 +48,331 @@ angular.module('syncspin', [
     $scope.sentence = {};
 
     $scope.options = {
+      places: [{
+        "id": "78",
+        "display": "in the car"
+      }, {
+        "id": "44",
+        "display": "out and about"
+      }, {
+        "id": "43",
+        "display": "at my computer"
+      }, {
+        "id": "50",
+        "display": "in the shower"
+      }, {
+        "id": "53",
+        "display": "at a party"
+      }, {
+        "id": "54",
+        "display": "in class"
+      }, {
+        "id": "55",
+        "display": "at home"
+      }, {
+        "id": "59",
+        "display": "at work"
+      }, {
+        "id": "58",
+        "display": "fashionably late"
+      }, {
+        "id": "75",
+        "display": "in bed"
+      }, {
+        "id": "77",
+        "display": "in the air"
+      }, {
+        "id": "79",
+        "display": "in the club"
+      }, {
+        "id": "80",
+        "display": "slacking off"
+      }, {
+        "id": "81",
+        "display": "bored as hell"
+      }, {
+        "id": "106",
+        "display": "thawing out"
+      }, {
+        "id": "107",
+        "display": "on a rooftop"
+      }, {
+        "id": "108",
+        "display": "in my underwear"
+      }, {
+        "id": "109",
+        "display": "on the subway"
+      }, {
+        "id": "178",
+        "display": "at the gym"
+      }],
 
-      places: ['in the car', 'out and about', 'at my computer', 'in the shower', 'at a party', 'in class', 'at home', 'at work', 'fashionably late', 'in bed', 'in the air', 'in the club', 'slacking off', 'bored as hell', 'thawing out', 'on a rooftop', 'in my underwear', 'on the subway', 'at the gym'],
+      activities: [{
+        "id": "67",
+        "display": "entertaining"
+      }, {
+        "id": "212",
+        "display": "dreaming"
+      }, {
+        "id": "214",
+        "display": "breaking stuff"
+      }, {
+        "id": "47",
+        "display": "being sad"
+      }, {
+        "id": "46",
+        "display": "going outside"
+      }, {
+        "id": "48",
+        "display": "celebrating"
+      }, {
+        "id": "49",
+        "display": "chilling out"
+      }, {
+        "id": "52",
+        "display": "starting a riot"
+      }, {
+        "id": "60",
+        "display": "humming along"
+      }, {
+        "id": "61",
+        "display": "cooking"
+      }, {
+        "id": "62",
+        "display": "partying hard"
+      }, {
+        "id": "66",
+        "display": "driving"
+      }, {
+        "id": "68",
+        "display": "jetsetting"
+      }, {
+        "id": "71",
+        "display": "making love"
+      }, {
+        "id": "73",
+        "display": "going back in time"
+      }, {
+        "id": "84",
+        "display": "kicking back"
+      }, {
+        "id": "85",
+        "display": "making bad choices"
+      }, {
+        "id": "112",
+        "display": "gaming"
+      }, {
+        "id": "113",
+        "display": "dancing"
+      }, {
+        "id": "114",
+        "display": "taking a selfie"
+      }, {
+        "id": "115",
+        "display": "getting naked"
+      }, {
+        "id": "116",
+        "display": "pre-partying"
+      }, {
+        "id": "117",
+        "display": "breaking something"
+      }, {
+        "id": "119",
+        "display": "romancing"
+      }, {
+        "id": "120",
+        "display": "running"
+      }, {
+        "id": "121",
+        "display": "saving the world"
+      }, {
+        "id": "123",
+        "display": "studying"
+      }, {
+        "id": "126",
+        "display": "wasting time"
+      }, {
+        "id": "127",
+        "display": "waking up"
+      }, {
+        "id": "128",
+        "display": "working out"
+      }, {
+        "id": "129",
+        "display": "working"
+      }],
 
-      activities: ['entertaining', 'dreaming', 'breaking stuff', 'being sad', 'going outside', 'celebrating', 'chilling out', 'starting a riot', 'humming along', 'cooking', 'partying hard', 'driving', 'jetsetting', 'making love', 'going back in time', 'kicking back', 'making bad choices', 'gaming', 'dancing', 'taking a selfie', 'getting naked', 'pre-partying', 'breaking something', 'romancing', 'running', 'saving the world', 'studying', 'wasting time', 'waking up', 'working out', 'working'],
+      people: [{
+        "id": "88",
+        "display": "your mom"
+      }, {
+        "id": "86",
+        "display": "my BFF"
+      }, {
+        "id": "51",
+        "display": "myself"
+      }, {
+        "id": "87",
+        "display": "my boo"
+      }, {
+        "id": "90",
+        "display": "my co-workers"
+      }, {
+        "id": "91",
+        "display": "the boys"
+      }, {
+        "id": "93",
+        "display": "strangers"
+      }, {
+        "id": "94",
+        "display": "no regrets"
+      }, {
+        "id": "96",
+        "display": "my boss"
+      }, {
+        "id": "97",
+        "display": "extraterrestrials"
+      }, {
+        "id": "98",
+        "display": "my lover"
+      }, {
+        "id": "99",
+        "display": "my pets"
+      }, {
+        "id": "100",
+        "display": "my thoughts"
+      }, {
+        "id": "111",
+        "display": "beautiful people"
+      }, {
+        "id": "118",
+        "display": "a stiff drink"
+      }, {
+        "id": "122",
+        "display": "my girls"
+      }, {
+        "id": "132",
+        "display": "your ex"
+      }, {
+        "id": "134",
+        "display": "my friends"
+      }, {
+        "id": "135",
+        "display": "my haters"
+      }],
 
-      people: ['your mom', 'my BFF', 'myself', 'my boo', 'my co-workers', 'the boys', 'strangers', 'no regrets', 'my boss', 'extraterrestrials', 'my lover', 'my pets', 'my thoughts', 'beautiful people', 'a stiff drink', 'my girls', 'your ex', 'my friends', 'my haters'],
-
-      genres: ['Classic Rock', '90s Pop-Rock', 'Alt Rock', 'Americana', 'Classic Country', 'Country', 'The 2000s', 'Disco', 'Dance', 'Electronic', 'Hair Metal', 'Rock', 'Hardcore Hip-Hop', 'Hardcore', 'Indie', 'Jazz Vocals', 'Jazz', 'Metal', 'Musica Mexicana', 'Musica Tropical', 'New Wave', 'Old School Hip-Hop', 'Old Skool Dance', 'Oldies', 'Pop Latino', 'Pop', 'Punk', 'Reggae & Dancehall', 'Seminal Indie', 'Smooth Jazz', 'Soft Rock', 'Sounds of the 70s', 'The 60s', 'The 80s', 'Vintage Soul & Funk', 'Hip-Hop', 'R&B']
+      genres: [{
+        "id": "8",
+        "display": "Classic Rock"
+      }, {
+        "id": "1",
+        "display": "90s Pop-Rock"
+      }, {
+        "id": "2",
+        "display": "Alt Rock"
+      }, {
+        "id": "3",
+        "display": "Americana"
+      }, {
+        "id": "7",
+        "display": "Classic Country"
+      }, {
+        "id": "9",
+        "display": "Country"
+      }, {
+        "id": "10",
+        "display": "The 2000s"
+      }, {
+        "id": "11",
+        "display": "Disco"
+      }, {
+        "id": "13",
+        "display": "Dance"
+      }, {
+        "id": "14",
+        "display": "Electronic"
+      }, {
+        "id": "16",
+        "display": "Hair Metal"
+      }, {
+        "id": "17",
+        "display": "Rock"
+      }, {
+        "id": "18",
+        "display": "Hardcore Hip-Hop"
+      }, {
+        "id": "19",
+        "display": "Hardcore"
+      }, {
+        "id": "21",
+        "display": "Indie"
+      }, {
+        "id": "22",
+        "display": "Jazz Vocals"
+      }, {
+        "id": "23",
+        "display": "Jazz"
+      }, {
+        "id": "24",
+        "display": "Metal"
+      }, {
+        "id": "25",
+        "display": "Musica Mexicana"
+      }, {
+        "id": "26",
+        "display": "Musica Tropical"
+      }, {
+        "id": "27",
+        "display": "New Wave"
+      }, {
+        "id": "28",
+        "display": "Old School Hip-Hop"
+      }, {
+        "id": "29",
+        "display": "Old Skool Dance"
+      }, {
+        "id": "30",
+        "display": "Oldies"
+      }, {
+        "id": "31",
+        "display": "Pop Latino"
+      }, {
+        "id": "32",
+        "display": "Pop"
+      }, {
+        "id": "33",
+        "display": "Punk"
+      }, {
+        "id": "34",
+        "display": "Reggae & Dancehall"
+      }, {
+        "id": "36",
+        "display": "Seminal Indie"
+      }, {
+        "id": "37",
+        "display": "Smooth Jazz"
+      }, {
+        "id": "38",
+        "display": "Soft Rock"
+      }, {
+        "id": "39",
+        "display": "Sounds of the 70s"
+      }, {
+        "id": "40",
+        "display": "The 60s"
+      }, {
+        "id": "41",
+        "display": "The 80s"
+      }, {
+        "id": "42",
+        "display": "Vintage Soul & Funk"
+      }, {
+        "id": "136",
+        "display": "Hip-Hop"
+      }, {
+        "id": "137",
+        "display": "R&B"
+      }]
     };
 
     $scope.room = {};
