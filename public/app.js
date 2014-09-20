@@ -1,5 +1,10 @@
 // Socket
-var socket = io('http://' + (process.env.PORT ? 'syncsp.in' : 'localhost'));
+var socket;
+if (location.hostname.indexOf('localhost') > -1) {
+  socket = io('http://localhost');
+} else {
+  socket = io('http://syncsp.in');
+}
 
 // Ghetto
 var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
@@ -38,11 +43,26 @@ angular.module('syncspin', [
     };
   })
   .controller('HostCtrl', function($scope, $stateParams, $http) {
+
+    $scope.sentence = {};
+
+    $scope.options = {
+
+      places: ['in the car', 'out and about', 'at my computer', 'in the shower', 'at a party', 'in class', 'at home', 'at work', 'fashionably late', 'in bed', 'in the air', 'in the club', 'slacking off', 'bored as hell', 'thawing out', 'on a rooftop', 'in my underwear', 'on the subway', 'at the gym'],
+
+      activities: ['entertaining', 'dreaming', 'breaking stuff', 'being sad', 'going outside', 'celebrating', 'chilling out', 'starting a riot', 'humming along', 'cooking', 'partying hard', 'driving', 'jetsetting', 'making love', 'going back in time', 'kicking back', 'making bad choices', 'gaming', 'dancing', 'taking a selfie', 'getting naked', 'pre-partying', 'breaking something', 'romancing', 'running', 'saving the world', 'studying', 'wasting time', 'waking up', 'working out', 'working'],
+
+      people: ['your mom', 'my BFF', 'myself', 'my boo', 'my co-workers', 'the boys', 'strangers', 'no regrets', 'my boss', 'extraterrestrials', 'my lover', 'my pets', 'my thoughts', 'beautiful people', 'a stiff drink', 'my girls', 'your ex', 'my friends', 'my haters'],
+
+      genres: ['Classic Rock', '90s Pop-Rock', 'Alt Rock', 'Americana', 'Classic Country', 'Country', 'The 2000s', 'Disco', 'Dance', 'Electronic', 'Hair Metal', 'Rock', 'Hardcore Hip-Hop', 'Hardcore', 'Indie', 'Jazz Vocals', 'Jazz', 'Metal', 'Musica Mexicana', 'Musica Tropical', 'New Wave', 'Old School Hip-Hop', 'Old Skool Dance', 'Oldies', 'Pop Latino', 'Pop', 'Punk', 'Reggae & Dancehall', 'Seminal Indie', 'Smooth Jazz', 'Soft Rock', 'Sounds of the 70s', 'The 60s', 'The 80s', 'Vintage Soul & Funk', 'Hip-Hop', 'R&B']
+    };
+
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
       $scope.room.count = 0;
     });
+    vizInit();
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {
         return;
@@ -54,6 +74,7 @@ angular.module('syncspin', [
         }
       }
       $scope.$apply();
+
     });
 
     socket.on('count', function(roomCount) {

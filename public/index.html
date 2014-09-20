@@ -3,26 +3,25 @@
 
 <head>
   <title>Syncspin</title>
-  <!-- inject:css -->
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- endinject -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/style.css" />
+  <base href="/" />
 </head>
 
 <body>
   <div ui-view>
   </div>
 
-  <!-- inject:js -->
   <script src="/bower_components/lodash/dist/lodash.compat.min.js"></script>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
   <script src="/bower_components/angular/angular.min.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="/bower_components/socket.io-client/socket.io.js"></script>
-  <!-- endinject -->
 
+  <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="/names.js"></script>
   <script src="/app.js"></script>
   <script src="/viz.js"></script>
