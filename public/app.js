@@ -8,6 +8,11 @@ angular.module('syncspin', [
         templateUrl: 'templates/create.html',
         controller: 'CreateCtrl'
       })
+      .state('host', {
+        url: '/host',
+        templateUrl: 'templates/host.html',
+        controller: 'HostCtrl'
+      })
       .state('vote', {
         url: '/vote',
         templateUrl: 'templates/vote.html',
@@ -15,7 +20,7 @@ angular.module('syncspin', [
       });
     $urlRouterProvider.otherwise('/create');
   })
-  .service('Session', function() {
+  .factory('Session', function() {
     return {};
   })
   .controller('CreateCtrl', function($scope, $location, Session) {
@@ -23,6 +28,9 @@ angular.module('syncspin', [
       Session.roomId = 'Loon';
       $location.url('/host');
     };
+  })
+  .controller('HostCtrl', function($scope, Session) {
+    $scope.host = Session.roomId;
   })
   .controller('VoteCtrl', function($scope) {
     $scope.songs = [{
