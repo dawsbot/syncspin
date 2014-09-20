@@ -1,8 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
  <head>
-  <title>My Beats Music Player</title>
+  <title>SyncSpin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
  </head>
  <body>
+  <div class="container">
+    <form action="">authentication
+    <br>trackId
+    <input type="text" id="trackId" size="50">
+    <br>autoplay
+    <input id="autoplay" type="checkbox" checked>
+    <br>loop
+    <input id="loopStream" type="checkbox">
+    <br>
+    <input id="loadStream" type="button" value="Load">
+    <input id="playStream" type="button" value="Play">
+    <input id="pauseStream" type="button" value="Pause">
+    <input id="stopStream" type="button" value="Stop">
+    <br>seek to
+    <input type="text" id="seek" size="20">
+    <input id="doSeek" type="button" value="Set">
+    <br>volume
+    <input type="text" id="volume" size="7">
+    <input id="doVolume" type="button" value="Set">
+    <input id="volumeDown" type="button" value="-">
+    <input id="volumeUp" type="button" value="+">
+    <input id="muted" type="button" value="unmute">
+    <input id="unmuted" type="button" value="mute">
+    <br>
+    <div id="trackName"></div>
+    <div id="timeDuration"></div>
+    <div id="timeElapsed"></div>
+    <div id="timeRemaining"></div>
+    <div>Buffered</div>
+    <div id="timeBufferedStart"></div>
+    <div id="timeBufferedEnd"></div>
+    <div id="timeBufferedLength"></div>
+    <div>Seekable</div>
+    <div id="timeSeekableStart"></div>
+    <div id="timeSeekableEnd"></div>
+    <div id="timeSeekableLength"></div>
+    </form>
+  </div>
+  <script src="bootstrap/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="http://bam.cdn.beatsmusic.com/bam-1.0.2.min.js"></script>
   <script>
   	function getJsonFromUrl() {
