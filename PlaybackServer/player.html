@@ -24,6 +24,9 @@
   <button id="next" type="button" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-fast-forward"></span> Next
   </div>
+  <div id = "playtable">
+  </div>
+
 </div>
 </button>
    
@@ -49,10 +52,10 @@
     //bam.on("ended", handleEnded);
     function handleReady(value) { 
       bam.clientId = "ytuyn29p9e5b4udwtgwmughe";
-      window.token = getJsonFromUrl().access_token;
+      token = getJsonFromUrl().access_token;
       //console.log(window.token)
       bam.authentication = {
-        access_token:window.token, 
+        access_token:token, 
         user_id:"liam.t.sargent"
       };
       bam.identifier = "tr82702885";
@@ -86,22 +89,22 @@ function handleError(value) {
         break;
     }
 };
-function getUserID(){
+
+function setUID(UID){
+  window.UID = UID;
+}
+
+function getSentence(place,activity,people,genre,timezone){
   var token = getJsonFromUrl().access_token;
-  console.log(token);
-  UID = $.ajax({url:'https://partner.api.beatsmusic.com/v1/api/me',
+    $.ajax({url:'https://partner.api.beatsmusic.com/v1/api/me',
          type: "GET",
          headers: {Authorization: 'Bearer '+ token},
          dataType:'json',
           success: function (data) {
-            UID = data.result.user_context;
-            console.log(data.result.user_context);
+            playlistHolder.initPlaylist(data.result.user_context,place,activity,people,genre,timezone);
           }
        });
-  return UID;
-
 }
-console.log(getUserID())
 
 var playlistHolder = {
     playedSongs:[],
@@ -121,28 +124,45 @@ var playlistHolder = {
               },*/
         dataType: 'json',
         success: function(data) {
-          console.log(data);
+          addToPlaylist(data)  
         }
       });
     },
 }; 
 
-playlistHolder.initPlaylist(getUserID(),'178','61','131','32','-0500')
+function addToPlaylist(array){
+  for (ii =0; ii<array.length; ii++){
+    playlistHolder.queuedSongs.push(array[ii].id);
+    console.log(array[ii].id);
+    }   
+}
 
-function loadNextSong(trackID) {
-    bam.identifier=trackID;
+getSentence('178','61','131','32','-0500');
+
+function playNextSong() {
+    console.log(playlistHolder.queuedSongs.splice(0,1));
+    nextup = playlistHolder.queuedSongs.splice(0,1);
+    bam.identifier=nextup;
     bam.load();
 };
+
+function loadSong(trackID) {
+  playlistHolder.queuedSongs.push(trackID);
+}
 
 function playSong() {
     bam.play()
 };
 
-//function handleEnded() {
-        //loadNextSong("tr82702885");
-//};
-    
-//jukeboxControl()
+var $playtable = $( "<table></table>" );
+
+for ( var i = 0; i <playlistHolder.queuedSongs.length; i++ ) {
+    var emp = playlistHolder.queuedSongs[i];
+    var $line = $( "<tr></tr>" );
+    $line.append( $( "<td></td>" ).html( emp ) );
+    $playtable.append( $line );
+}
+$playtable.appendTo( $( "#playtable" ) );
 
 $( "#play" ).click(function() {
     bam.play()
@@ -154,11 +174,12 @@ $( "#stop" ).click(function() {
     bam.stop()
 });
 $( "#next" ).click(function() {
-    loadNextSong('tr39611761')
+    playNextSong();
 });
 $("#submitID").click(function(){
-    loadNextSong($("#songID").val());
+    loadSong($("#songID").val());
 });
+
   </script>
  </body>
 </html>
