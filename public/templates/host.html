@@ -4,54 +4,59 @@
       <h1 class="page-header">Hosting room: {{room.id}} <small><a ng-href="http://syncsp.in/{{room.id}}">http://syncsp.in/{{room.id}}</a></small></h1>
     </div>
   </div>
-  <div class="row">
-    <div class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">Now Playing: Bonfire by Childish Gambino</a>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><a>1:58 / 2:06</a>
-          </li>
-          <li><a><i class="fa fa-step-backward"></i></a>
-          </li>
-          <li><a><i class="fa fa-play"></i></a>
-          </li>
-          <li><a><i class="fa fa-step-forward"></i></a>
-          </li>
-          <li><a>{{room.count}} listeners</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div ng-if="room.songs.length == 0">
+    <p>You don't have any songs.</p>
   </div>
-  <div class="row">
-    <div class="col-md-3">
-      <h2 class="page-header song-queue-header">Song Queue</h2>
-      <div ng-repeat="song in room.songs | orderBy:'-votes'">
-        <div class="row song">
-          <div class="col-md-4">
-            <img class="album-artwork" ng-src="{{song.artwork}}">
+  <div ng-if="room.songs.length != 0">
+    <div class="row">
+      <div class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Now Playing: Bonfire by Childish Gambino</a>
           </div>
-          <div class="col-md-6">
-            <p class="song-name">{{song.name}}</p>
-            <p class="song-artist">{{song.artist}}</p>
-          </div>
-          <div class="col-md-2 votes">
-            <p class="votes-count">{{song.votes}}</p>
-          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>1:58 / 2:06</a>
+            </li>
+            <li><a><i class="fa fa-step-backward"></i></a>
+            </li>
+            <li><a><i class="fa fa-play"></i></a>
+            </li>
+            <li><a><i class="fa fa-step-forward"></i></a>
+            </li>
+            <li><a>{{room.count}} listeners</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="col-md-9">
-      Visualization should go here.
+    <div class="row">
+      <div class="col-md-3">
+        <h2 class="page-header song-queue-header">Song Queue</h2>
+        <div ng-repeat="song in room.songs | orderBy:'-votes'">
+          <div class="row song">
+            <div class="col-md-4">
+              <img class="album-artwork" ng-src="{{song.artwork}}">
+            </div>
+            <div class="col-md-6">
+              <p class="song-name">{{song.name}}</p>
+              <p class="song-artist">{{song.artist}}</p>
+            </div>
+            <div class="col-md-2 votes">
+              <p class="votes-count">{{song.votes}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        Visualization should go here.
+      </div>
     </div>
   </div>
 </div>
