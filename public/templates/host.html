@@ -5,15 +5,14 @@
     </div>
   </div>
   <div ng-if="room.songs.length == 0">
-    <p>You don't have any songs.</p>
     <h2>I'm</h2>
-    <input id="sentencePlace" class="form-control sentence-part" type="text" ng-model="sentence.place" typeahead="place for place in options.places | filter:$viewValue | limitTo:8" />
+    <input id="sentencePlace" placeholder="Place" class="form-control sentence-part" type="text" ng-model="sentence.place" typeahead="place for place in options.places | filter:$viewValue | limitTo:8" />
     <h2>and feel like</h2>
-    <input id="sentenceActivity" class="form-control sentence-part" type="text" ng-model="sentence.activity" typeahead="activity for activity in options.activities | filter:$viewValue | limitTo:8" />
+    <input id="sentenceActivity" placeholder="Activity" class="form-control sentence-part" type="text" ng-model="sentence.activity" typeahead="activity for activity in options.activities | filter:$viewValue | limitTo:8" />
     <h2>with</h2>
-    <input id="sentencePeople" class="form-control sentence-part" type="text" ng-model="sentence.people" typeahead="people for people in options.people | filter:$viewValue | limitTo:8" />
+    <input id="sentencePeople" placeholder="People" class="form-control sentence-part" type="text" ng-model="sentence.people" typeahead="people for people in options.people | filter:$viewValue | limitTo:8" />
     <h2>to</h2>
-    <input id="sentenceGenre" class="form-control sentence-part" type="text" ng-model="sentence.genre" typeahead="genre for genre in options.genres | filter:$viewValue | limitTo:8" />
+    <input id="sentenceGenre" placeholder="Genre" class="form-control sentence-part" type="text" ng-model="sentence.genre" typeahead="genre for genre in options.genres | filter:$viewValue | limitTo:8" />
   </div>
   <div ng-if="room.songs.length != 0">
     <div class="row">
