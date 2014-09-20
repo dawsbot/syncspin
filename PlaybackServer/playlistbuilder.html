@@ -19,6 +19,18 @@
      </div>
    
     <!--include sources-->
+    <script type="text/javascript">
+    function getJsonFromUrl() {
+        var query = location.search.substr(1);
+        var result = {};
+        query.split("&").forEach(function(part) {
+          var item = part.split("=");
+          result[item[0]] = decodeURIComponent(item[1]);
+    }   );
+    return result;
+    }
+    var token = getJsonFromUrl.access_token
+    </script>
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
