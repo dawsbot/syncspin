@@ -78,13 +78,15 @@ io.on('connection', function(socket) {
     var usr = _.clone(users[socket.id]);
     delete users[socket.id];
 
-    var userCt = _.filter(users, function(user) {
-      return user.room === usr.room;
-    }).length;
-    io.emit('count', {
-      room: usr.room,
-      count: userCt
-    });
+    if (usr) {
+      var userCt = _.filter(users, function(user) {
+        return user.room === usr.room;
+      }).length;
+      io.emit('count', {
+        room: usr.room,
+        count: userCt
+      });
+    }
   });
 
 });
