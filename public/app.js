@@ -9,30 +9,27 @@ angular.module('syncspin', [
         controller: 'CreateCtrl'
       })
       .state('host', {
-        url: '/host',
+        url: '/:roomId/host',
         templateUrl: 'templates/host.html',
         controller: 'HostCtrl'
       })
       .state('vote', {
-        url: '/vote',
+        url: '/:roomId',
         templateUrl: 'templates/vote.html',
         controller: 'VoteCtrl'
       });
     $urlRouterProvider.otherwise('/create');
   })
-  .factory('Session', function() {
-    return {};
-  })
-  .controller('CreateCtrl', function($scope, $location, Session) {
+  .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
-      Session.roomId = 'Loon';
-      $location.url('/host');
+      var roomId = 'Loon';
+      $location.url('/' + roomId + '/host');
     };
   })
-  .controller('HostCtrl', function($scope, Session) {
-    $scope.host = Session.roomId;
+  .controller('HostCtrl', function($scope, $stateParams) {
+    $scope.roomId = $stateParams.roomId;
   })
-  .controller('VoteCtrl', function($scope) {
+  .controller('VoteCtrl', function($scope, $stateParams) {
     $scope.songs = [{
       name: 'Recess',
       artist: 'Skrillex',
