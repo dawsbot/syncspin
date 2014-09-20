@@ -6,3 +6,27 @@
   height: auto;
   width: 100%;
 }
+
+.votes {
+  font-size: 20px;
+}
+
+.inline {
+  float: left;
+  margin-right: 10px;
+  padding-top: 20%;
+}
+
+.inline-last {
+  float: left;
+  padding-top: 20%;
+}
+
+.up-arrow {
+  margin-top: 9px;
+}
+
+.down-arrow {
+  margin-top: -9px;
+}
+
