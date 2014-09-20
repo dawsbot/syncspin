@@ -44,6 +44,7 @@ angular.module('syncspin', [
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
+      $scope.room.count = 0;
     });
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {

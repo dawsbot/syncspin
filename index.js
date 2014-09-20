@@ -31,6 +31,10 @@ function getRoom(roomId) {
       }]
     };
   }
+  console.log('asdf');
+  room.count = _.filter(users, function(user) {
+    return user.room === room.id;
+  }).length;
   return room;
 }
 
