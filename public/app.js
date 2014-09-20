@@ -41,13 +41,13 @@ angular.module('syncspin', [
     $scope.roomId = $stateParams.roomId;
   })
   .controller('VoteCtrl', function($scope, $stateParams) {
-      socket.on('upvote', function(song){
-          for (var i = 0; i < $scope.songs.length; i++) {
-              if ($scope.songs[i].id === song.id) {
-                  $scope.songs[i].votes++;
-              }
-          }
-      });
+    socket.on('upvote', function(song) {
+      for (var i = 0; i < $scope.songs.length; i++) {
+        if ($scope.songs[i].id === song.id) {
+          $scope.songs[i].votes++;
+        }
+      }
+    });
     $scope.songs = [{
       id: 'asdf',
       name: 'Recess',
