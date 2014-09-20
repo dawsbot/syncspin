@@ -29,7 +29,7 @@ angular.module('syncspin', [
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
-      var roomId = colors[Math.floor(Math.random() * colors.length)]+'-'+landforms[Math.floor(Math.random() * landforms.length)]
+      var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
