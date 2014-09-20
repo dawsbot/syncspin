@@ -3,12 +3,26 @@ angular.module('syncspin', [
 ])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('create', {
+        url: '/create',
+        templateUrl: 'templates/create.html',
+        controller: 'CreateCtrl'
+      })
       .state('vote', {
         url: '/vote',
         templateUrl: 'templates/vote.html',
         controller: 'VoteCtrl'
       });
-    $urlRouterProvider.otherwise('/vote');
+    $urlRouterProvider.otherwise('/create');
+  })
+  .service('Session', function() {
+    return {};
+  })
+  .controller('CreateCtrl', function($scope, $location, Session) {
+    $scope.createRoom = function() {
+      Session.roomId = 'Loon';
+      $location.url('/host');
+    };
   })
   .controller('VoteCtrl', function($scope) {
     $scope.songs = [{
