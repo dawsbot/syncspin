@@ -25,7 +25,7 @@ angular.module('syncspin', [
         controller: 'VoteCtrl'
       });
     $urlRouterProvider.otherwise('/create');
-    $locationProvider.setHtml5Mode(true);
+    $locationProvider.html5Mode(true);
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
