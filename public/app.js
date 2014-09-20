@@ -37,6 +37,18 @@ angular.module('syncspin', [
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
     });
+    socket.on('vote', function(vote) {
+      if (vote.uuid === uuid) {
+        return;
+      }
+      var songs = $scope.room.songs;
+      for (var i = 0; i < songs.length; i++) {
+        if (songs[i].id === vote.id) {
+          songs[i].votes += vote.change;
+        }
+      }
+      $scope.$apply();
+    });
   })
   .controller('VoteCtrl', function($scope, $stateParams, $http) {
     $scope.room = {};
