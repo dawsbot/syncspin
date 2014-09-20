@@ -1,1 +1,13 @@
-Test
+<div class="container">
+  <div ng-repeat="song in songs">
+    <div class="row song">
+      <div class="col-xs-3 col-md-1">
+        <img class="album-artwork" ng-src="{{song.artwork}}">
+      </div>
+      <div class="col-xs-9 col-md-3">
+        <p class="song-name">{{song.name}}</p>
+        <p class="song-artist">{{song.artist}}</p>
+      </div>
+    </div>
+  </div>
+</div>
