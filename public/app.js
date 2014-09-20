@@ -42,7 +42,7 @@ angular.module('syncspin', [
         $scope.showModal = false;
     }
     $scope.createRoom = function() {
-      var roomId = animals[Math.floor(Math.random() * animals.length)]; // This is not actually a uuid]
+      var roomId = colors[Math.floor(Math.random() * colors.length)]+'-'+landforms[Math.floor(Math.random() * landforms.length)]
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
