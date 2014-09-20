@@ -49,6 +49,7 @@
     var bam = new BeatsAudioManager("SyncSpin");
     bam.on("ready", handleReady);
     bam.on("error", handleError);
+    bam.on("ended", handleEnded);
     //bam.on("ended", handleEnded);
     function handleReady(value) { 
       bam.clientId = "ytuyn29p9e5b4udwtgwmughe";
@@ -58,13 +59,13 @@
         access_token:token, 
         user_id:"liam.t.sargent"
       };
-      bam.identifier = "tr82702885";
+      bam.identifier = "tr28509943";
       bam.autoplay = true;
       bam.load();
       };
-function handleError(value) {
-    console.log("Error: " + value);
-    switch(value){
+    function handleError(value) {
+      console.log("Error: " + value);
+      switch(value){
         case "auth":
         console.log("auth error = ")
         // Beats Music API auth error (401)
@@ -87,13 +88,25 @@ function handleError(value) {
         case "flashversion":
         // flash version too low or not installed
         break;
+      }
+    };
+function handleEnded() {
+      playNextSong();
     }
-};
 
 function setUID(UID){
   window.UID = UID;
 }
 
+
+/*********************************************************
+/ Call getSentence periodically to build a sentence query
+/ and populate the playlist for the room. We need to find
+/ a way to incorporate votes
+/
+/
+/
+**********************************************************/
 function getSentence(place,activity,people,genre,timezone){
   var token = getJsonFromUrl().access_token;
     $.ajax({url:'https://partner.api.beatsmusic.com/v1/api/me',
@@ -107,62 +120,66 @@ function getSentence(place,activity,people,genre,timezone){
 }
 
 var playlistHolder = {
-    playedSongs:[],
-    queuedSongs:[],
-    initPlaylist: function(user_id,place,activity,people,genre,timezone){
-      var token = getJsonFromUrl().access_token;
-      $.ajax({
-        type: "POST",
-        url: 'https://partner.api.beatsmusic.com/v1/api/users/'+user_id+'/recs/the_sentence?place='+place+'&activity='
-        +activity+'&people='+people+'&genre='+genre+'&time_zone='+timezone+'&access_token='+token,
-        /*data: {'place':place,
-               'activity':activity,
-               'people':people,
-               'genre':genre,
-               'time_zone':timezone,
-               'access_token':window.token
-              },*/
-        dataType: 'json',
-        success: function(data) {
-          addToPlaylist(data)  
-        }
-      });
-    },
+  playedSongs:[],
+  queuedSongs:[],
+  initPlaylist: function(user_id,place,activity,people,genre,timezone){
+    var token = getJsonFromUrl().access_token;
+    $.ajax({
+      type: "POST",
+      url: 'https://partner.api.beatsmusic.com/v1/api/users/'+user_id+'/recs/the_sentence?place='+place+'&activity='
+      +activity+'&people='+people+'&genre='+genre+'&time_zone='+timezone+'&access_token='+token,
+      dataType: 'json',
+      success: function(data) {
+       playlistHolder.addToPlaylist(data.data);
+      }
+    });
+  },
+  addToPlaylist: function(array){
+    for (ii =0; ii<array.length; ii++){
+      playlistHolder.queuedSongs.push({'id':array[ii].id,
+                                     'name':array[ii].title,
+                                     'artist':array[ii].artist_display_name
+                                    });
+      }
+      console.log(playlistHolder);   
+  }
+  syncPlaylists: function(room_id) {
+    $.ajax({
+      type: "POST",
+      url: 'https://syncsp.in/'+room_id+'/sync'
+      dataType: 'json'
+      success : function(data) {
+        //data handling here
+      }
+    })
+  }
+
 }; 
 
-function addToPlaylist(array){
-  for (ii =0; ii<array.length; ii++){
-    playlistHolder.queuedSongs.push(array[ii].id);
-    console.log(array[ii].id);
-    }   
-}
+
 
 getSentence('178','61','131','32','-0500');
 
+console.log(playlistHolder)
+
 function playNextSong() {
-    console.log(playlistHolder.queuedSongs.splice(0,1));
-    nextup = playlistHolder.queuedSongs.splice(0,1);
+    if (playlistHolder.queuedSongs.length<5) {
+      getSentence('178','61','131','32','-0500');
+    }
+      nextup = playlistHolder.queuedSongs.splice(0,1)[0].id;
+      playlistHolder.playedSongs.push(nextup);
     bam.identifier=nextup;
     bam.load();
+    console.log(nextup);
 };
 
 function loadSong(trackID) {
   playlistHolder.queuedSongs.push(trackID);
-}
+};
 
 function playSong() {
     bam.play()
 };
-
-var $playtable = $( "<table></table>" );
-
-for ( var i = 0; i <playlistHolder.queuedSongs.length; i++ ) {
-    var emp = playlistHolder.queuedSongs[i];
-    var $line = $( "<tr></tr>" );
-    $line.append( $( "<td></td>" ).html( emp ) );
-    $playtable.append( $line );
-}
-$playtable.appendTo( $( "#playtable" ) );
 
 $( "#play" ).click(function() {
     bam.play()
