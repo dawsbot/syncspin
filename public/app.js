@@ -21,7 +21,7 @@ angular.module('syncspin', [
         controller: 'HostCtrl'
       })
       .state('vote', {
-        url: '/:roomId',
+        url: '/:roomId/',
         templateUrl: 'templates/vote.html',
         controller: 'VoteCtrl'
       });
@@ -41,7 +41,6 @@ angular.module('syncspin', [
     };
   })
   .controller('HostCtrl', function($scope, $stateParams, $http) {
-    console.log('asdf');
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
