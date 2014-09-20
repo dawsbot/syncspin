@@ -1,4 +1,4 @@
-$(Document).ready(function(){
+$(document).ready(function(){
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substrRegex;
@@ -34,7 +34,7 @@ $(Document).ready(function(){
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
 
-  $('#the-basics.typeahead').typeahead({
+  $('#the-basics .typeahead').typeahead({
     hint: true,
     highlight: true,
     minLength: 1
