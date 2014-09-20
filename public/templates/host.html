@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="page-header">Hosting room: {{roomId}} <small><a ng-href="http://syncsp.in/{{roomId}}">http://syncsp.in/{{roomId}}</a></small></h1>
+      <h1 class="page-header">Hosting room: {{room.id}} <small><a ng-href="http://syncsp.in/{{room.id}}">http://syncsp.in/{{room.id}}</a></small></h1>
     </div>
   </div>
   <div class="row">
     <div class="col-md-3">
-      <div ng-repeat="song in songs | orderBy:'-votes'">
+      <div ng-repeat="song in room.songs | orderBy:'-votes'">
         <div class="row song">
           <div class="col-md-4">
             <img class="album-artwork" ng-src="{{song.artwork}}">
