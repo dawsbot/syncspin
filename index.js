@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -6,6 +7,7 @@ var path = require('path');
 
 // Memory is the new Redis
 var rooms = {};
+var users = {};
 
 // Get the room from a room id
 function getRoom(roomId) {
@@ -47,7 +49,7 @@ io.on('connection', function(socket) {
   socket.on('vote', function(vote) {
     var song;
     var songs = getRoom(vote.room).songs;
-    for (var i = 0; i < songs.length; i++ ) {
+    for (var i = 0; i < songs.length; i++) {
       if (songs[i].id === vote.id) {
         song = songs[i];
       }
@@ -56,12 +58,33 @@ io.on('connection', function(socket) {
     io.emit('vote', vote);
   });
 
-  socket.on('joinRoom', function(username) {
-    // io.emit('joinroom'
+  socket.on('join', function(room) {
+    var user = {
+      room: room.id,
+      id: socket.id
+    };
+    users[socket.id] = user;
+
+    var userCt = _.filter(users, function(user) {
+      return user.room === room.id;
+    }).length;
+    io.emit('count', {
+      room: room.id,
+      count: userCt
+    });
   });
 
-  socket.on('leaveRoom', function() {
-    // io.emit('joinroom', 
+  socket.on('disconnect', function() {
+    var usr = _.clone(users[socket.id]);
+    delete users[socket.id];
+
+    var userCt = _.filter(users, function(user) {
+      return user.room === usr.room;
+    }).length;
+    io.emit('count', {
+      room: usr.room,
+      count: userCt
+    });
   });
 
 });
