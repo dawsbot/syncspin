@@ -1,0 +1,544 @@
+{
+    "data": {
+        "type": "sentence_config",
+        "activities": [
+            {
+                "ref_type": "sentence_activity",
+                "id": "67",
+                "display": "entertaining"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "212",
+                "display": "dreaming"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "214",
+                "display": "breaking stuff"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "47",
+                "display": "being sad"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "46",
+                "display": "going outside"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "48",
+                "display": "celebrating"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "49",
+                "display": "chilling out"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "52",
+                "display": "starting a riot"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "60",
+                "display": "humming along"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "61",
+                "display": "cooking"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "62",
+                "display": "partying hard"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "66",
+                "display": "driving"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "68",
+                "display": "jetsetting"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "71",
+                "display": "making love"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "73",
+                "display": "going back in time"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "84",
+                "display": "kicking back"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "85",
+                "display": "making bad choices"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "112",
+                "display": "gaming"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "113",
+                "display": "dancing"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "114",
+                "display": "taking a selfie"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "115",
+                "display": "getting naked"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "116",
+                "display": "pre-partying"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "117",
+                "display": "breaking something"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "119",
+                "display": "romancing"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "120",
+                "display": "running"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "121",
+                "display": "saving the world"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "123",
+                "display": "studying"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "126",
+                "display": "wasting time"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "127",
+                "display": "waking up"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "128",
+                "display": "working out"
+            },
+            {
+                "ref_type": "sentence_activity",
+                "id": "129",
+                "display": "working"
+            }
+        ],
+        "genres": [
+            {
+                "ref_type": "sentence_genre",
+                "id": "8",
+                "display": "Classic Rock"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "1",
+                "display": "90s Pop-Rock"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "2",
+                "display": "Alt Rock"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "3",
+                "display": "Americana"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "7",
+                "display": "Classic Country"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "9",
+                "display": "Country"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "10",
+                "display": "The 2000s"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "11",
+                "display": "Disco"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "13",
+                "display": "Dance"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "14",
+                "display": "Electronic"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "16",
+                "display": "Hair Metal"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "17",
+                "display": "Rock"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "18",
+                "display": "Hardcore Hip-Hop"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "19",
+                "display": "Hardcore"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "21",
+                "display": "Indie"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "22",
+                "display": "Jazz Vocals"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "23",
+                "display": "Jazz"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "24",
+                "display": "Metal"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "25",
+                "display": "Musica Mexicana"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "26",
+                "display": "Musica Tropical"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "27",
+                "display": "New Wave"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "28",
+                "display": "Old School Hip-Hop"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "29",
+                "display": "Old Skool Dance"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "30",
+                "display": "Oldies"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "31",
+                "display": "Pop Latino"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "32",
+                "display": "Pop"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "33",
+                "display": "Punk"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "34",
+                "display": "Reggae & Dancehall"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "36",
+                "display": "Seminal Indie"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "37",
+                "display": "Smooth Jazz"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "38",
+                "display": "Soft Rock"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "39",
+                "display": "Sounds of the 70s"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "40",
+                "display": "The 60s"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "41",
+                "display": "The 80s"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "42",
+                "display": "Vintage Soul & Funk"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "136",
+                "display": "Hip-Hop"
+            },
+            {
+                "ref_type": "sentence_genre",
+                "id": "137",
+                "display": "R&B"
+            }
+        ],
+        "people": [
+            {
+                "ref_type": "sentence_people",
+                "id": "88",
+                "display": "your mom"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "86",
+                "display": "my BFF"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "51",
+                "display": "myself"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "87",
+                "display": "my boo"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "90",
+                "display": "my co-workers"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "91",
+                "display": "the boys"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "93",
+                "display": "strangers"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "94",
+                "display": "no regrets"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "96",
+                "display": "my boss"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "97",
+                "display": "extraterrestrials"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "98",
+                "display": "my lover"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "99",
+                "display": "my pets"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "100",
+                "display": "my thoughts"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "111",
+                "display": "beautiful people"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "118",
+                "display": "a stiff drink"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "122",
+                "display": "my girls"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "132",
+                "display": "your ex"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "134",
+                "display": "my friends"
+            },
+            {
+                "ref_type": "sentence_people",
+                "id": "135",
+                "display": "my haters"
+            }
+        ],
+        "places": [
+            {
+                "ref_type": "sentence_place",
+                "id": "78",
+                "display": "in the car"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "44",
+                "display": "out and about"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "43",
+                "display": "at my computer"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "50",
+                "display": "in the shower"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "53",
+                "display": "at a party"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "54",
+                "display": "in class"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "55",
+                "display": "at home"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "59",
+                "display": "at work"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "58",
+                "display": "fashionably late"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "75",
+                "display": "in bed"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "77",
+                "display": "in the air"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "79",
+                "display": "in the club"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "80",
+                "display": "slacking off"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "81",
+                "display": "bored as hell"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "106",
+                "display": "thawing out"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "107",
+                "display": "on a rooftop"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "108",
+                "display": "in my underwear"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "109",
+                "display": "on the subway"
+            },
+            {
+                "ref_type": "sentence_place",
+                "id": "178",
+                "display": "at the gym"
+            }
+        ]
+    },
+    "code": "OK"
+}

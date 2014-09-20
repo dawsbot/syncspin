@@ -1,0 +1,1 @@
+['in the car', 'out and about', 'at my computer', 'in the shower', 'at a party', 'in class', 'at home', 'at work', 'fashionably late', 'in bed', 'in the air', 'in the club', 'slacking off', 'bored as hell', 'thawing out', 'on a rooftop', 'in my underwear', 'on the subway', 'at the gym']
