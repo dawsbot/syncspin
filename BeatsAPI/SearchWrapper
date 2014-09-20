@@ -1,0 +1,15 @@
+import urllib2 
+import json
+from pprint import pprint as pp
+
+
+class BeatsSearch:
+	"""A class to allow searching of the public Beats Music API"""
+	def init(self, APIkey):
+		self.requeststring = "https://partner.api.beatsmusic.com/v1/api/search?q="
+		self.APIkey = APIkey
+	def search(self, searchString, searchType):
+		query = "q=" + searchString.replace(" ","+")
+
+		result = urllib2.urlopen(self.requeststring + searchString)
+
