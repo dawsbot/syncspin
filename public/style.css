@@ -34,3 +34,6 @@
 .down-arrow-selected {
   color: #9494ff;
 }
+.song-queue-header {
+  margin-top: 10px;
+}
