@@ -8,13 +8,22 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
+    socket.on('upvote', function(vote){
+        io.emit('upvote', vote);
+    });
+    socket.on('downvote', function(vote){
+        io.emit('downvote', vote);
+    });
+    socket.on('joinRoom', function(username){
+        io.emit('joinroom', 
+    });
+    socket.on('leaveRoom', function(){
+        io.emit('joinroom', 
     });
 });
 
 io.on('connection', function(socket){
-      socket.broadcast.emit('hi');
+
 });
 
 http.listen(3000, function(){

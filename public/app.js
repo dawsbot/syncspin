@@ -64,6 +64,7 @@ angular.module('syncspin', [
         song.votes++;
         song.vote = 1;
       }
+      socket.emit('upvote', song);
     };
 
     $scope.downvoteSong = function(song) {
@@ -77,5 +78,6 @@ angular.module('syncspin', [
         song.votes--;
         song.vote = -1;
       }
+      socket.emit('downvote', song);
     };
   });
