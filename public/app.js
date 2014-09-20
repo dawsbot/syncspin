@@ -33,10 +33,7 @@ angular.module('syncspin', [
       $location.url('/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
-      $http.get('/api/' + $stateParams.roomId).success(function(data) {
-        var roomsList = data;
-      });
-      var roomId = $scope.text;
+      var roomId = $scope.roomToJoin;
       $location.url('/' + roomId);
     };
   })
