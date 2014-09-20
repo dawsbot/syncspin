@@ -2,7 +2,7 @@
 var socket = io('http://localhost');
 
 // Ghetto
-var uuid = Math.floor(Math.random() * 1000000);
+var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
 
 angular.module('syncspin', [
   'ui.router'
@@ -46,14 +46,20 @@ angular.module('syncspin', [
     }];
     $scope.roomId = $stateParams.roomId;
   })
-  .controller('VoteCtrl', function($scope, $stateParams) {
+  .controller('VoteCtrl', function($scope, $stateParams, $http) {
+    $scope.room = {};
+    $http.get('/api/' + $stateParams.roomId).success(function(data) {
+      $scope.room = data;
+    });
+
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {
         return;
       }
-      for (var i = 0; i < $scope.songs.length; i++) {
-        if ($scope.songs[i].id === vote.id) {
-          $scope.songs[i].votes += vote.change;
+      var songs = $scope.room.songs;
+      for (var i = 0; i < songs.length; i++) {
+        if (songs[i].id === vote.id) {
+          songs[i].votes += vote.change;
         }
       }
       $scope.$apply();
@@ -63,24 +69,11 @@ angular.module('syncspin', [
       song.votes += amt;
       socket.emit('vote', {
         id: song.id,
+        room: $scope.room.id,
         change: amt,
         uuid: uuid
       });
     }
-
-    $scope.songs = [{
-      id: 'asdf',
-      name: 'Recess',
-      artist: 'Skrillex',
-      artwork: 'http://upload.wikimedia.org/wikipedia/en/archive/5/52/20140314115000!RecessSkrillex.jpg',
-      votes: 0
-    }, {
-      id: 'asdff',
-      name: 'Play it Again',
-      artist: 'Luke Bryan',
-      artwork: 'http://tonefunk.com/wp-content/uploads/2014/03/UMG_cvrart_00602537511556_01_RGB72_1500x1500_13UAAIM59985.170x170-75.jpg',
-      votes: 0
-    }];
 
     $scope.upvoteSong = function(song) {
       if (song.vote === 1) {
