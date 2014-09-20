@@ -32,8 +32,10 @@ var people = ['your mom', 'my BFF', 'myself', 'my boo', 'my co-workers', 'the bo
 
   var genres = ['Classic Rock', '90s Pop-Rock', 'Alt Rock', 'Americana', 'Classic Country', 'Country', 'The 2000s', 'Disco', 'Dance', 'Electronic', 'Hair Metal', 'Rock', 'Hardcore Hip-Hop', 'Hardcore', 'Indie', 'Jazz Vocals', 'Jazz', 'Metal', 'Musica Mexicana', 'Musica Tropical', 'New Wave', 'Old School Hip-Hop', 'Old Skool Dance', 'Oldies', 'Pop Latino', 'Pop', 'Punk', 'Reggae & Dancehall', 'Seminal Indie', 'Smooth Jazz', 'Soft Rock', 'Sounds of the 70s', 'The 60s', 'The 80s', 'Vintage Soul & Funk', 'Hip-Hop', 'R&B'];
 
-
-
+  $('#submitsentence').click(function() {
+      //console.log("#places".val());
+      console.log("yo");
+  });
 
   $('#placespicker .typeahead').typeahead({
     hint: true,
@@ -76,4 +78,5 @@ var people = ['your mom', 'my BFF', 'myself', 'my boo', 'my co-workers', 'the bo
     displayKey: 'value',
     source: substringMatcher(genres)
   });
+
 });
