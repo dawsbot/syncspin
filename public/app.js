@@ -1,5 +1,5 @@
 // Socket
-var socket = io('http://localhost');
+var socket = io('http://' + (process.env.PORT ? 'syncsp.in' : 'localhost'));
 
 // Ghetto
 var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid

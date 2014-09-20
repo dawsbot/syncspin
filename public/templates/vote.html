@@ -2,10 +2,10 @@
   <h2 class="page-header">Vote for the next song!</h2>
   <div ng-repeat="song in room.songs | orderBy:'-votes'">
     <div class="row song">
-      <div class="col-xs-3 col-md-1">
+      <div class="col-xs-3">
         <img class="album-artwork" ng-src="{{song.artwork}}">
       </div>
-      <div class="col-xs-5 col-md-3">
+      <div class="col-xs-5">
         <p class="song-name">{{song.name}}</p>
         <p class="song-artist">{{song.artist}}</p>
       </div>
