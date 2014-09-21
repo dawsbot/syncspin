@@ -1,13 +1,12 @@
-var isMobile = {
-  Android: function() {
-    return /Android/i.test(navigator.userAgent);
-  },
-  iOS: function() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  },
-  any: function() {
-    return (isMobile.Android() || isMobile.iOS());
-  }
+var isMobile = { Android: function() {
+        return /Android/i.test(navigator.userAgent);
+    },
+    iOS: function() {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.iOS());
+    }
 };
 
 function setupAccelerometer() {
@@ -56,8 +55,7 @@ function setupAccelerometer() {
       var maxsumios = 1815;
       var mysum = arAlphamax + arBetamax + arGammamax;
       var toreturn;
-      if (isMobile.isAndroid()) {
-        alert("isAndroid");
+      if (isMobile.isAndroid()){
         if (mysum > maxsumandroid) {
           toreturn = 1;
         } else {
@@ -65,7 +63,7 @@ function setupAccelerometer() {
         }
       }
       //is ios
-      else {
+      else{
         if (mysum > maxsumios) {
           toreturn = 1;
         } else {
@@ -79,7 +77,7 @@ function setupAccelerometer() {
         level: toreturn
       });
 
-      arAlphamax = -10;
+      arAlphamax = -10; 
       arBetamax = -10;
       arGammamax = -10;
     }, delay);
