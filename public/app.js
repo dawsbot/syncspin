@@ -87,11 +87,14 @@ angular.module('syncspin', [
     };
 
     function playNextSong() {
+      console.log('DEBUG: Playing next song');
       if ($scope.room.songs.length < 5) {
         getSentence($scope.sentence);
       }
 
       var run = function() {
+        window.runStart = true;
+        console.log('RUN');
         bam.clientId = 'ytuyn29p9e5b4udwtgwmughe';
         bam.authentication = {
           access_token: getToken(),
@@ -125,9 +128,18 @@ angular.module('syncspin', [
         $scope.$apply();
       };
 
-      if (bam.readyState === 0) {
+      console.log(bam);
+      if (!bam.playing) {
+        console.log('WAIT RUN');
         bam.on('ready', run);
+        // HACK
+        setTimeout(function() {
+          if (!window.runStart) {
+            run();
+          }
+        }, 500);
       } else {
+        console.log('NOW RUN');
         run();
       }
     };
@@ -146,12 +158,8 @@ angular.module('syncspin', [
           Authorization: 'Bearer ' + token
         }
       }).success(function(data) {
-        playlistHolder.initPlaylist(data.result.user_context, sentence);
-      });
-    }
+        var user_id = data.result.user_context;
 
-    var playlistHolder = {
-      initPlaylist: function(user_id, sentence) {
         function idOf(type, display) {
           return _.find($scope.options[type], function(opt) {
             return opt.display === display;
@@ -168,35 +176,23 @@ angular.module('syncspin', [
         $http.post(
           'https://partner.api.beatsmusic.com/v1/api/users/' + user_id + '/recs/the_sentence?place=' + place + '&activity=' + activity + '&people=' + people + '&genre=' + genre + '&time_zone=' + timezone + '&access_token=' + token
         ).success(function(data) {
-          playlistHolder.addToPlaylist(data.data);
+          var array = data.data;
+          for (ii = 0; ii < array.length; ii++) {
+            $scope.room.songs.push({
+              id: array[ii].id,
+              name: array[ii].title,
+              artist: array[ii].artist_display_name,
+              votes: 0
+            });
+          }
+          socket.emit('newSongs', {
+            room: $scope.room.id,
+            songs: $scope.room.songs
+          });
           playNextSong();
         });
-      },
-      addToPlaylist: function(array) {
-        for (ii = 0; ii < array.length; ii++) {
-          $scope.room.songs.push({
-            id: array[ii].id,
-            name: array[ii].title,
-            artist: array[ii].artist_display_name,
-            votes: 0
-          });
-        }
-        socket.emit('newSongs', {
-          room: $scope.room.id,
-          songs: $scope.room.songs
-        });
-      },
-      syncPlaylists: function(room_id) {
-        $.ajax({
-          type: "POST",
-          url: 'https://syncsp.in/' + room_id + '/sync',
-          dataType: 'json',
-          success: function(data) {
-            //data handling here
-          }
-        })
-      }
-    };
+      });
+    }
 
     $scope.generatePlaylist = function() {
       var s = $scope.sentence; // Get sentence
@@ -532,11 +528,6 @@ angular.module('syncspin', [
         "display": "R&B"
       }]
     };
-    $scope.room = {};
-    $http.get('/api/' + $stateParams.roomId).success(function(data) {
-      $scope.room = data;
-      $scope.room.count = 0;
-    });
 
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {
