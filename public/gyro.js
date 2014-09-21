@@ -5,9 +5,9 @@ function setupAccelerometer() {
   var arGamma = 0;
 
   //initial max acceleration really low
-  var arAlphamax = -100;
-  var arBetamax = -100;
-  var arGammamax = -100;
+  var arAlphamax = -10;
+  var arBetamax = -10;
+  var arGammamax = -10;
 
   var delay = 1000;
   var vMultiplier = 0.01;
@@ -52,6 +52,10 @@ function setupAccelerometer() {
       socket.emit('activity', {
         level: toreturn
       });
+
+      arAlphamax = -10;
+      arBetamax = -10;
+      arGammamax = -10;
     }, delay);
   }
 }
