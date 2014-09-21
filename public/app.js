@@ -701,10 +701,10 @@ angular.module('syncspin', [
       $http.get(
         'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + $scope.searchQuery.replace(/ /g, '+') + '&client_id=' + client_ID
       ).success(function(data) {
-        var name = data.data.title;
-        var artist = data.data.artist_display_name;
+        var name = data.data[0].title;
+        var artist = data.data[0].artist_display_name;
         var rslt = {
-          sidd: data.data.id,
+          sidd: data.data[0].id,
           name: name,
           artist: artist,
           votes: 0
