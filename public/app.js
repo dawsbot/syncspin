@@ -88,7 +88,7 @@ angular.module('syncspin', [
 
     function playNextSong() {
       if ($scope.room.songs.length < 5) {
-        getSentence($scope.sentence);
+        updatePlaylist($scope.sentence);
       }
 
       var run = function() {
@@ -170,7 +170,7 @@ angular.module('syncspin', [
       return $location.search().access_token;
     }
 
-    function getSentence(sentence) {
+    function updatePlaylist(sentence) {
       var token = getToken();
       $http({
         url: 'https://partner.api.beatsmusic.com/v1/api/me',
@@ -217,7 +217,7 @@ angular.module('syncspin', [
 
     $scope.generatePlaylist = function() {
       var s = $scope.sentence; // Get sentence
-      getSentence(s);
+      updatePlaylist(s);
     };
 
     $scope.sentence = {};
