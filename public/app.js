@@ -3,7 +3,7 @@ var timezone = '-0500';
 // Socket
 var base;
 if (location.hostname === 'localhost') {
-  base = 'http://localhost/';
+  base = 'http://localhost:3000/';
 } else {
   base = 'http://www.syncsp.in/';
 }
@@ -61,7 +61,7 @@ angular.module('syncspin', [
     $scope.playing = {};
 
     // Audio stuff
-    var bam = new BeatsAudioManager('SyncSpin');
+    var bam = $scope.bam = new BeatsAudioManager('SyncSpin');
 
     bam.on('error', function(value) {
       console.log('Error: ' + value);
@@ -69,7 +69,18 @@ angular.module('syncspin', [
 
     bam.on('ended', playNextSong);
 
+    $scope.paused = false;
     $scope.controls = {
+      play: function() {
+        bam.play();
+        $scope.paused = false;
+        $scope.$apply();
+      },
+      pause: function() {
+        bam.pause();
+        $scope.paused = true;
+        $scope.$apply();
+      },
       next: function() {
         playNextSong();
       }
@@ -88,6 +99,16 @@ angular.module('syncspin', [
         };
 
         // The next song to play
+
+        $scope.room.songs.sort(function(a, b) {
+          if (a.votes < b.votes) {
+            return 1;
+          } else if (a.votes > b.votes) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
         var nextup = $scope.room.songs.splice(0, 1)[0];
         $scope.playing = nextup;
 
@@ -98,7 +119,6 @@ angular.module('syncspin', [
         $scope.$apply();
       };
 
-      console.log(bam);
       if (bam.readyState === 0) {
         bam.on('ready', run);
       } else {
