@@ -694,10 +694,12 @@ angular.module('syncspin', [
       }
     };
 
-    $scope.searchSong = function(searchQuery) {
+    $scope.searchQuery = '';
+
+    $scope.searchSong = function() {
       var client_ID = 'ytuyn29p9e5b4udwtgwmughe'
       $http.get(
-        'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + searchQuery + '&client_id=' + client_ID
+        'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + $scope.searchQuery + '&client_id=' + client_ID
       ).success(function(data) {
         var rslt = {
           'sidd': data.data.id,
