@@ -720,7 +720,7 @@ angular.module('syncspin', [
         socket.emit('newSongs', {
           room: $scope.room.id,
           songs: [rslt]
-        }) l
+        });
 
         console.log(rslt);
         $scope.room.songs.push(rslt);
