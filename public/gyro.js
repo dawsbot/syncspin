@@ -49,6 +49,8 @@ function setupAccelerometer() {
         toreturn = mysum / maxsum;
       }
 
+      toreturn = Math.max(0, toreturn);
+
       socket.emit('activity', {
         level: toreturn
       });
