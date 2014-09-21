@@ -13,4 +13,4 @@ Mood Progression
 So what is so special about this democratic jukebox? You.
 We developed this idea to serve you and mold to your environment. As you move from one song to another, the suggestions sway to the style of the winning songs
 
-To demonstrate moods even better, I would encourage you to join one of our live rooms during a demonstration. You will immediatly notice atleast one pulsing ring on your screen. We use this as a symbol of you - and a symbol of your personality. Take your phone and move it around. Notice your ring brighten up and flicker faster? That is our crowd mood analytic system at work. 
+To demonstrate moods even better, I would encourage you to join one of our live rooms during a demonstration. You will immediately notice at least one pulsing ring on your screen. We use this as a symbol of you - and a symbol of your personality. Take your phone and move it around. Notice your ring brighten up and flicker faster? That is our crowd mood analytic system at work. 
