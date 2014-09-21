@@ -102,7 +102,6 @@ angular.module('syncspin', [
           room: $scope.room.id,
           songs: $scope.room.songs
         });
-        console.log('a2p called');
       },
       syncPlaylists: function(room_id) {
         $.ajax({
