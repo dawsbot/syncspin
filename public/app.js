@@ -97,8 +97,12 @@ angular.module('syncspin', [
             artist: array[ii].artist_display_name,
             votes: 0
           });
+          
+          socket.emit('newSongs', {
+            room: $scope.room.id,
+            songs: $scope.room.songs
+          });
         }
-        console.log(playlistHolder);
       },
       syncPlaylists: function(room_id) {
         $.ajax({

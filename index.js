@@ -86,6 +86,14 @@ io.on('connection', function(socket) {
     });
   });
 
+  socket.on('newSongs', function(newSongs) {
+    var room = getRoom(newSongs.room);
+    _.each(newSongs.songs, function(song) {
+      room.songs.push(song);
+    });
+    io.emit('newSongs', newSongs);
+  });
+
   socket.on('disconnect', function() {
     var usr = _.clone(users[socket.id]);
     delete users[socket.id];
