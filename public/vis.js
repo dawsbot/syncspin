@@ -41,6 +41,7 @@ function initVis() {
   if (initVised) {
     return;
   }
+  console.log('initvis');
   setupVis();
   socket.on('activityDigest', digestHandler);
   initVised = true;

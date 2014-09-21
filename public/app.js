@@ -69,6 +69,7 @@ angular.module('syncspin', [
       $scope.sentence = data.sentence;
       if ($scope.room.songs.length > 0) {
         playNextSong();
+        setTimeout(initVis, 1000);
       }
     });
     $scope.playing = {};
@@ -134,6 +135,10 @@ angular.module('syncspin', [
           song: nextId
         });
 
+        setInterval(function() {
+          initVis();
+          console.log('HELLYEA');
+        }, 1000);
         $scope.room.playedSongs.push(nextId);
         bam.identifier = nextId;
         bam.load();
@@ -252,7 +257,6 @@ angular.module('syncspin', [
         sentence: s
       });
       updatePlaylist(s);
-      setTimeout(initVis, 1000);
     };
 
     $scope.sentence = {};
@@ -606,7 +610,6 @@ angular.module('syncspin', [
       $scope.$apply();
     });
 
-    setTimeout(initVis, 1000);
   })
   .controller('VoteCtrl', function($scope, $stateParams, $http) {
     $scope.room = {};
