@@ -703,8 +703,8 @@ angular.module('syncspin', [
       ).success(function(data) {
         var rslt = {
           sidd: data.data.id,
-          'name: data.data.title,
-          artist': data.data.artist_display_name,
+          name: data.data.title,
+          artist: data.data.artist_display_name,
           votes: 0
         };
         $scope.room.songs.push(rslt);
