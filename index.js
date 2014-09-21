@@ -17,7 +17,8 @@ function getRoom(roomId) {
       users: [],
       id: roomId,
       songs: [],
-      nodes: []
+      nodes: [],
+      playedSongs: []
     };
   }
 
@@ -90,6 +91,14 @@ io.on('connection', function(socket) {
       count: userCt,
       nodes: room.nodes
     });
+  });
+
+  socket.on('newSongs', function(newSongs) {
+    var room = getRoom(newSongs.room);
+    _.each(newSongs.songs, function(song) {
+      room.songs.push(song);
+    });
+    io.emit('newSongs', newSongs);
   });
 
   socket.on('disconnect', function() {

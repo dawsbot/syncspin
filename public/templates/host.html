@@ -13,6 +13,7 @@
     <input id="sentencePeople" placeholder="People" class="form-control sentence-part" type="text" ng-model="sentence.people" typeahead="people.display for people in options.people | filter:$viewValue | limitTo:8" />
     <h2>to</h2>
     <input id="sentenceGenre" placeholder="Genre" class="form-control sentence-part" type="text" ng-model="sentence.genre" typeahead="genre.display for genre in options.genres | filter:$viewValue | limitTo:8" />
+    <button class="btn btn-primary" ng-click="generatePlaylist()">Generate Playlist</button>
   </div>
   <div ng-if="room.songs.length != 0">
     <div class="row">
@@ -25,7 +26,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Now Playing: Bonfire by Childish Gambino</a>
+            <a class="navbar-brand">Now Playing: {{playing.name}} by {{playing.artist}}</a>
           </div>
 
           <ul class="nav navbar-nav navbar-right">
@@ -33,9 +34,10 @@
             </li>
             <li><a><i class="fa fa-step-backward"></i></a>
             </li>
-            <li><a><i class="fa fa-play"></i></a>
+            <li ng-if="paused"><a><i class="fa fa-play" ng-click="controls.play()"></i></a>
+            <li ng-if="!paused"><a><i class="fa fa-pause" ng-click="controls.pause()"></i></a>
             </li>
-            <li><a><i class="fa fa-step-forward"></i></a>
+            <li><a ng-click="controls.next()"><i class="fa fa-step-forward"></i></a>
             </li>
             <li><a>{{room.count}} listeners</a>
             </li>
@@ -44,7 +46,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <h2 class="page-header song-queue-header">Song Queue</h2>
         <div ng-repeat="song in room.songs | orderBy:'-votes'">
           <div class="row song">
