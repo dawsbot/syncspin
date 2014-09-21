@@ -58,6 +58,7 @@ angular.module('syncspin', [
         playNextSong();
       }
     });
+    $scope.playing = {};
 
     // Audio stuff
     var bam = new BeatsAudioManager('SyncSpin');
@@ -79,10 +80,16 @@ angular.module('syncspin', [
           access_token: getToken(),
           user_id: 'liam.t.sargent'
         };
-        var nextup = $scope.room.songs.splice(0, 1)[0].id;
-        $scope.room.playedSongs.push(nextup);
-        bam.identifier = nextup;
+
+        // The next song to play
+        var nextup = $scope.room.songs.splice(0, 1)[0];
+        $scope.playing = nextup;
+
+        var nextId = nextup.id;
+        $scope.room.playedSongs.push(nextId);
+        bam.identifier = nextId;
         bam.load();
+        $scope.$apply();
       });
     };
 
