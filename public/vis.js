@@ -77,7 +77,7 @@ function initVis(room) {
 
       var scaled = Math.floor(val.level * 10);
       var freq = 1000 / scaled;
-      makeCircles(opts, scaled, freq);
+      makeCircles(circle, scaled, freq);
     });
   }
 
