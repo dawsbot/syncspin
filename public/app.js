@@ -697,7 +697,7 @@ angular.module('syncspin', [
 	$scope.searchSong = function(searchQuery) {
 		var client_ID = 'ytuyn29p9e5b4udwtgwmughe'
         $http({
-        url: "https://partner.api.beatsmusic.com/v1/api/search?type=track&q="+ searchQuery
+        url: "https://partner.api.beatsmusic.com/v1/api/search?type=track&q="+ searchQuery +
 		&client_id=" + client_ID,
         type: 'GET',
       }).success(function(data) {
