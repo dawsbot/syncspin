@@ -702,7 +702,8 @@ angular.module('syncspin', [
         var rslt = {
           'sidd': data.data.id,
           'name': data.data.title,
-          'artist': data.data.artist_display_name 'votes': 0
+          'artist': data.data.artist_display_name,
+          'votes': 0
         };
         $scope.room.songs.push(rslt);
       });
