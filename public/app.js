@@ -87,14 +87,12 @@ angular.module('syncspin', [
     };
 
     function playNextSong() {
-      console.log('DEBUG: Playing next song');
       if ($scope.room.songs.length < 5) {
         getSentence($scope.sentence);
       }
 
       var run = function() {
         window.runStart = true;
-        console.log('RUN');
         bam.clientId = 'ytuyn29p9e5b4udwtgwmughe';
         bam.authentication = {
           access_token: getToken(),
@@ -128,9 +126,7 @@ angular.module('syncspin', [
         $scope.$apply();
       };
 
-      console.log(bam);
       if (!bam.playing) {
-        console.log('WAIT RUN');
         bam.on('ready', run);
         // HACK
         setTimeout(function() {
@@ -139,7 +135,6 @@ angular.module('syncspin', [
           }
         }, 500);
       } else {
-        console.log('NOW RUN');
         run();
       }
     };
