@@ -71,6 +71,9 @@ io.on('connection', function(socket) {
         song = songs[i];
       }
     }
+    if (!song) {
+      return;
+    }
     song.votes += vote.change;
     io.emit('vote', vote);
   });
