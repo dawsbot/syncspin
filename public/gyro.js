@@ -55,8 +55,8 @@ function setupAccelerometer() {
       var maxsumios = 1815;
       var mysum = arAlphamax + arBetamax + arGammamax;
       var toreturn;
-      if (isMobile.Android()){
-        if (mysum > maxsumandoid) {
+      if (isMobile.isAndroid()){
+        if (mysum > maxsumandroid) {
           toreturn = 1;
         } else {
           toreturn = mysum / maxsumandroid;
