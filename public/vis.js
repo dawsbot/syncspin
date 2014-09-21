@@ -1,3 +1,5 @@
+var initVised = false;
+
 function setupVis() {
   var width = '100%';
   var height = 500;
@@ -36,6 +38,10 @@ function digestHandler() {
 }
 
 function initVis() {
+  if (initVised) {
+    return;
+  }
   setupVis();
   socket.on('activityDigest', digestHandler);
+  initVised = true;
 }

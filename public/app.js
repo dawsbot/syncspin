@@ -54,6 +54,18 @@ angular.module('syncspin', [
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
       $scope.room.count = 0;
+      _.forEach($scope.room.songs, function(song) {
+        (function(sng) {
+          var artist = sng.artist;
+          var name = sng.name;
+          $http.get('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=4715e5e59b0d1f7153025ed7e0ccc627&artist=' + artist + '&track=' + name + '&format=json')
+            .success(function(data) {
+              try {
+                sng.artwork = data.track.album.image[2]['#text'];
+              } catch (e) {}
+            });
+        })(song);
+      });
       $scope.sentence = data.sentence;
       if ($scope.room.songs.length > 0) {
         playNextSong();
@@ -206,13 +218,6 @@ angular.module('syncspin', [
             var name = array[ii].title;
             var artist = array[ii].artist_display_name;
 
-            // Dupe removal 1
-            if (_.find($scope.room.songs, function(song) {
-              return song.id === sidd;
-            })) {
-              continue;
-            }
-
             var sng = {
               id: sidd,
               name: name,
@@ -247,6 +252,7 @@ angular.module('syncspin', [
         sentence: s
       });
       updatePlaylist(s);
+      setTimeout(initVis, 1000);
     };
 
     $scope.sentence = {};
