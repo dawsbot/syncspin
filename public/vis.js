@@ -1,7 +1,7 @@
 var initVised = false;
 var theRoom;
 
-var colors = ['#AE81FF', '#E6DB74', '#66D9EF', '#465457'];
+var colors = ['#b58900', '#cb4b16', '#dc322f', '#d33682', '#6c71c4', '#268bd2', '#2aa198', '#859900'];
 
 function initVis(room) {
   theRoom = room;
@@ -40,6 +40,21 @@ function initVis(room) {
       .remove();
   }
 
+  function makeCircles(opts, amt, interval) {
+    var accum = 0;
+
+    function go() {
+      setTimeout(function() {
+        makeCircle(opts);
+        accum++;
+        if (accum < amt) {
+          go();
+        }
+      }, interval);
+    }
+    go();
+  }
+
   var circles = {};
 
   function digestHandler(digest) {
@@ -60,7 +75,9 @@ function initVis(room) {
       var opts = _.clone(circle);
       opts.duration = 1000;
 
-      makeCircle(opts);
+      var scaled = Math.floor(val.level * 10);
+      var freq = 1000 / scaled;
+      makeCircles(opts, scaled, freq);
     });
   }
 
