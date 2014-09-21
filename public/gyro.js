@@ -1,5 +1,4 @@
-var isMobile = {
-    Android: function() {
+var isMobile = { Android: function() {
         return /Android/i.test(navigator.userAgent);
     },
     iOS: function() {
@@ -17,9 +16,9 @@ function setupAccelerometer() {
   var arGamma = 0;
 
   //initial max acceleration really low
-  var arAlphamax = 0;
-  var arBetamax = 0;
-  var arGammamax = 0;
+  var arAlphamax = -10;
+  var arBetamax = -10;
+  var arGammamax = -10;
 
   var delay = 1000;
   var vMultiplier = 0.01;
@@ -78,9 +77,9 @@ function setupAccelerometer() {
         level: toreturn
       });
 
-      arAlphamax = 0;
-      arBetamax = 0;
-      arGammamax = 0;
+      arAlphamax = -10; 
+      arBetamax = -10;
+      arGammamax = -10;
     }, delay);
   }
 }
