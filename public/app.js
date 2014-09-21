@@ -48,17 +48,6 @@ angular.module('syncspin', [
     };
   })
   .controller('HostCtrl', function($scope, $stateParams, $http, $location) {
-    socket.on('newSongs', function(newSongs) {
-      if ($scope.room.id !== newSongs.room) {
-        return;
-      }
-      for (var i = 0; i < newSongs.songs.length; i++) {
-        var sgg = newSongs.songs[i];
-        $scope.room.songs.push(newSongs.songs[i]);
-        $scope.$apply();
-      }
-    });
-
     // Host ctrl
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
