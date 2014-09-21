@@ -43,3 +43,18 @@
 .sentence-part {
   width: 200px;
 }
+
+#vis {
+  width: 100%;
+  height: 500px;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 5px;
+}

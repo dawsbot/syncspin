@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="page-header">Hosting room: {{room.id}} <small><a ng-href="http://syncsp.in/{{room.id}}">http://syncsp.in/{{room.id}}</a></small></h1>
+      <h1 class="page-header">Hosting room: {{room.id}} <small><a ng-href="http://www.syncsp.in/{{room.id}}">www.syncsp.in/{{room.id}}</a></small></h1>
     </div>
   </div>
   <div ng-if="room.songs.length == 0">
@@ -30,17 +30,17 @@
           </div>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a>1:58 / 2:06</a>
+            <li><a>{{seekTime}}</a>
             </li>
             <li><a><i class="fa fa-step-backward"></i></a>
             </li>
             <li ng-if="paused"><a><i class="fa fa-play" ng-click="controls.play()"></i></a>
-            <li ng-if="!paused"><a><i class="fa fa-pause" ng-click="controls.pause()"></i></a>
-            </li>
-            <li><a ng-click="controls.next()"><i class="fa fa-step-forward"></i></a>
-            </li>
-            <li><a>{{room.count}} listeners</a>
-            </li>
+              <li ng-if="!paused"><a><i class="fa fa-pause" ng-click="controls.pause()"></i></a>
+              </li>
+              <li><a ng-click="controls.next()"><i class="fa fa-step-forward"></i></a>
+              </li>
+              <li><a>{{room.count}} listeners</a>
+              </li>
           </ul>
         </div>
       </div>
@@ -63,8 +63,9 @@
           </div>
         </div>
       </div>
-        <div id="dotViz" class="col-md-8">
-        </div>
+      <div class="col-md-8">
+        <div id="vis"></div>
+      </div>
     </div>
   </div>
 </div>

@@ -38,7 +38,7 @@ angular.module('syncspin', [
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
-      var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
+      var roomId = animals[Math.floor(Math.random() * animals.length)];
       var client_id = 'ytuyn29p9e5b4udwtgwmughe';
       window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri=' + base + roomId + '/host');
     };
@@ -54,8 +54,22 @@ angular.module('syncspin', [
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
       $scope.room.count = 0;
+      _.forEach($scope.room.songs, function(song) {
+        (function(sng) {
+          var artist = sng.artist;
+          var name = sng.name;
+          $http.get('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=4715e5e59b0d1f7153025ed7e0ccc627&artist=' + artist + '&track=' + name + '&format=json')
+            .success(function(data) {
+              try {
+                sng.artwork = data.track.album.image[2]['#text'];
+              } catch (e) {}
+            });
+        })(song);
+      });
+      $scope.sentence = data.sentence;
       if ($scope.room.songs.length > 0) {
         playNextSong();
+        setTimeout(initVis, 1000);
       }
     });
     $scope.playing = {};
@@ -88,7 +102,8 @@ angular.module('syncspin', [
 
     function playNextSong() {
       if ($scope.room.songs.length < 5) {
-        getSentence($scope.sentence);
+        updatePlaylist($scope.sentence);
+        console.log('should update');
       }
 
       var run = function() {
@@ -120,6 +135,10 @@ angular.module('syncspin', [
           song: nextId
         });
 
+        setInterval(function() {
+          initVis();
+          console.log('HELLYEA');
+        }, 1000);
         $scope.room.playedSongs.push(nextId);
         bam.identifier = nextId;
         bam.load();
@@ -139,12 +158,38 @@ angular.module('syncspin', [
       }
     };
 
+    function pad(num) {
+      var s = "000000000" + num;
+      return s.substr(s.length - 2);
+    }
+
+    // Update seek
+    $scope.seekTime = '0:00 / 0:00';
+
+    setInterval(function() {
+      var theBam = $scope.bam;
+      if (!theBam || theBam.readyState === 0) {
+        return;
+      }
+
+      var time = Math.floor(theBam.currentTime);
+      var secs = time % 60;
+      var mins = (time - secs) / 60;
+
+      var total = Math.floor(theBam.duration);
+      var totalSecs = total % 60;
+      var totalMins = (total - totalSecs) / 60;
+
+      $scope.seekTime = mins + ':' + pad(secs) + ' / ' + totalMins + ':' + pad(totalSecs);
+      $scope.$apply();
+    }, 500);
+
     // PLAYLIST CRAP
     function getToken() {
       return $location.search().access_token;
     }
 
-    function getSentence(sentence) {
+    function updatePlaylist(sentence) {
       var token = getToken();
       $http({
         url: 'https://partner.api.beatsmusic.com/v1/api/me',
@@ -173,12 +218,27 @@ angular.module('syncspin', [
         ).success(function(data) {
           var array = data.data;
           for (ii = 0; ii < array.length; ii++) {
-            $scope.room.songs.push({
-              id: array[ii].id,
-              name: array[ii].title,
-              artist: array[ii].artist_display_name,
+
+            var sidd = array[ii].id;
+            var name = array[ii].title;
+            var artist = array[ii].artist_display_name;
+
+            var sng = {
+              id: sidd,
+              name: name,
+              artist: artist,
               votes: 0
-            });
+            };
+            $scope.room.songs.push(sng);
+
+            (function(sng) {
+              $http.get('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=4715e5e59b0d1f7153025ed7e0ccc627&artist=' + artist + '&track=' + name + '&format=json')
+                .success(function(data) {
+                  try {
+                    sng.artwork = data.track.album.image[2]['#text'];
+                  } catch (e) {}
+                });
+            })(sng);
           }
           socket.emit('newSongs', {
             room: $scope.room.id,
@@ -191,7 +251,12 @@ angular.module('syncspin', [
 
     $scope.generatePlaylist = function() {
       var s = $scope.sentence; // Get sentence
-      getSentence(s);
+      // dafuq this doesnt need to be realtime yolo
+      socket.emit('setSentence', {
+        room: $scope.room.id,
+        sentence: s
+      });
+      updatePlaylist(s);
     };
 
     $scope.sentence = {};
@@ -546,29 +611,23 @@ angular.module('syncspin', [
     });
 
   })
-  .controller('RoomsCtrl', function($scope, $stateParams, $http) {
-    $http.get('/api/rooms').success(function(data) {
-      $scope.rooms = data;
-    });
-    socket.on('vote', function(vote) {
-      if (vote.uuid === uuid) {
-        return;
-      }
-      var songs = $scope.room.songs;
-      for (var i = 0; i < songs.length; i++) {
-        if (songs[i].id === vote.id) {
-          songs[i].votes += vote.change;
-        }
-      }
-      $scope.$apply();
-    });
-  })
   .controller('VoteCtrl', function($scope, $stateParams, $http) {
     $scope.room = {};
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
       socket.emit('join', {
         id: $scope.room.id
+      });
+
+      _.each(data.songs, function(song) {
+        (function(sng) {
+          $http.get('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=4715e5e59b0d1f7153025ed7e0ccc627&artist=' + song.artist + '&track=' + song.name + '&format=json')
+            .success(function(data) {
+              try {
+                sng.artwork = data.track.album.image[2]['#text'];
+              } catch (e) {}
+            });
+        })(song);
       });
     });
 
@@ -627,4 +686,6 @@ angular.module('syncspin', [
         song.vote = -1;
       }
     };
+
+    setupAccelerometer();
   });
