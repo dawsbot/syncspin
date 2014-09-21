@@ -16,6 +16,7 @@ function getRoom(roomId) {
     room = rooms[roomId] = {
       users: [],
       id: roomId,
+      playedSongs: [],
       songs: []
     };
   }

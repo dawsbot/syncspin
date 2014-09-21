@@ -2,12 +2,12 @@ var timezone = '-0500';
 
 // Socket
 var base;
-if (location.hostname.indexOf('localhost') > -1) {
+if (location.hostname === 'localhost') {
   base = 'http://localhost/';
 } else {
   base = 'http://www.syncsp.in/';
 }
-var socket = io('http://www.syncsp.in');
+var socket = io(base);
 
 // Ghetto
 var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
@@ -40,7 +40,7 @@ angular.module('syncspin', [
     $scope.createRoom = function() {
       var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
       var client_id = 'ytuyn29p9e5b4udwtgwmughe';
-      window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri='+ base + roomId + '/host');
+      window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri=' + base + roomId + '/host');
     };
     $scope.joinRoom = function() {
       var roomId = $scope.roomToJoin;
@@ -48,6 +48,43 @@ angular.module('syncspin', [
     };
   })
   .controller('HostCtrl', function($scope, $stateParams, $http, $location) {
+
+    // Host ctrl
+    $scope.room = {};
+    $http.get('/api/' + $stateParams.roomId).success(function(data) {
+      $scope.room = data;
+      $scope.room.count = 0;
+      if ($scope.room.songs.length > 0) {
+        playNextSong();
+      }
+    });
+
+    // Audio stuff
+    var bam = new BeatsAudioManager('SyncSpin');
+
+    bam.on('error', function(value) {
+      console.log('Error: ' + value);
+    });
+
+    bam.on('ended', playNextSong);
+
+    function playNextSong() {
+      if ($scope.room.songs.length < 5) {
+        getSentence($scope.sentence);
+      }
+
+      bam.on('ready', function() {
+        bam.clientId = 'ytuyn29p9e5b4udwtgwmughe';
+        bam.authentication = {
+          access_token: getToken(),
+          user_id: 'liam.t.sargent'
+        };
+        var nextup = $scope.room.songs.splice(0, 1)[0].id;
+        $scope.room.playedSongs.push(nextup);
+        bam.identifier = nextup;
+        bam.load();
+      });
+    };
 
     // PLAYLIST CRAP
     function getToken() {
@@ -63,7 +100,6 @@ angular.module('syncspin', [
           Authorization: 'Bearer ' + token
         }
       }).success(function(data) {
-        console.log(data);
         playlistHolder.initPlaylist(data.result.user_context, sentence);
       });
     }
@@ -87,6 +123,7 @@ angular.module('syncspin', [
           'https://partner.api.beatsmusic.com/v1/api/users/' + user_id + '/recs/the_sentence?place=' + place + '&activity=' + activity + '&people=' + people + '&genre=' + genre + '&time_zone=' + timezone + '&access_token=' + token
         ).success(function(data) {
           playlistHolder.addToPlaylist(data.data);
+          playNextSong();
         });
       },
       addToPlaylist: function(array) {
@@ -449,12 +486,6 @@ angular.module('syncspin', [
         "display": "R&B"
       }]
     };
-
-    $scope.room = {};
-    $http.get('/api/' + $stateParams.roomId).success(function(data) {
-      $scope.room = data;
-      $scope.room.count = 0;
-    });
     vizInit();
 
     socket.on('vote', function(vote) {
@@ -477,6 +508,7 @@ angular.module('syncspin', [
       $scope.room.count = roomCount.count;
       $scope.$apply();
     });
+
   })
   .controller('RoomsCtrl', function($scope, $stateParams, $http) {
     $http.get('/api/rooms').success(function(data) {
