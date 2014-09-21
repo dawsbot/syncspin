@@ -139,6 +139,32 @@ angular.module('syncspin', [
       }
     };
 
+    function pad(num) {
+      var s = "000000000" + num;
+      return s.substr(s.length - 2);
+    }
+
+    // Update seek
+    $scope.seekTime = '0:00 / 0:00';
+
+    setInterval(function() {
+      var theBam = $scope.bam;
+      if (!theBam || theBam.readyState === 0) {
+        return;
+      }
+
+      var time = Math.floor(theBam.currentTime);
+      var secs = time % 60;
+      var mins = (time - secs) / 60;
+
+      var total = Math.floor(theBam.duration);
+      var totalSecs = total % 60;
+      var totalMins = (total - totalSecs) / 60;
+
+      $scope.seekTime = mins + ':' + pad(secs) + ' / ' + totalMins + ':' + pad(totalSecs);
+      $scope.$apply();
+    }, 500);
+
     // PLAYLIST CRAP
     function getToken() {
       return $location.search().access_token;
