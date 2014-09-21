@@ -5,6 +5,7 @@
   <title>SyncSpin Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--<script src="GEQ.js"></script>-->
 
  </head>
  <body>
@@ -26,6 +27,40 @@
   </div>
   <div id = "playtable">
   </div>
+  <canvas id="WaveCanvas" width="1024" height="400"></canvas>
+  <script>
+var c = document.getElementById("WaveCanvas");
+var ctx = c.getContext("2d");
+function renderFrame(waveDataFrame) {
+    for (int pp =0; pp<waveDataFrame.length/16; pp++){
+      for (int qq = 0; qq<16; qq++){
+         sum[pp] += waveDataFrame[32*pp+qq]
+      }
+      for (int ll = 0; ll<sum.length; ll++){
+        val[ll] = sum[ll]/32;
+      }
+      console.log(val[0]);
+      console.log(val[3]);
+    
+    }
+    /*
+    // you can then access all the frequency and volume data
+    // and use it to draw whatever you like on your canvas
+    for(bin = 0; bin < waveDataFrame.length; bin = bin+2) {
+
+        // do something with each value. Here's a simple example
+        var val = waveDataFrame[bin]*400;
+        var red = val;
+        var green = 255 - val;
+        var blue = val / 2; 
+        ctx.fillStyle = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+        ctx.fillRect(1024-bin*2 , 400, 1, 400-val);
+        // use lines and shapes to draw to the canvas is various ways. Use your imagination!
+    }
+    */
+}
+</script>
+
 
 </div>
 </button>
@@ -35,7 +70,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="http://bam.cdn.beatsmusic.com/bam-1.0.2.min.js"></script>
+
   <script>
+
     function getJsonFromUrl() {
         var query = location.search.substr(1);
         var result = {};
@@ -50,6 +87,8 @@
     bam.on("ready", handleReady);
     bam.on("error", handleError);
     bam.on("ended", handleEnded);
+    bam.on("timeupdate", handleTimeUpdate);
+
     //bam.on("ended", handleEnded);
     function handleReady(value) { 
       bam.clientId = "ytuyn29p9e5b4udwtgwmughe";
@@ -61,6 +100,7 @@
       };
       bam.identifier = "tr28509943";
       bam.autoplay = true;
+      eq.init(bam);
       bam.load();
       };
     function handleError(value) {
@@ -93,6 +133,9 @@
 function handleEnded() {
       playNextSong();
     }
+function handleTimeUpdate() {
+    renderFrame(bam.spectrumData);
+  }
 
 function setUID(UID){
   window.UID = UID;
@@ -197,6 +240,11 @@ $("#submitID").click(function(){
     loadSong($("#songID").val());
 });
 
+  
+
   </script>
+  
+
+
  </body>
 </html>
