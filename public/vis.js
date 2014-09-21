@@ -44,7 +44,7 @@ function initVis() {
     _.forEach(digest, function(val, id) {
       var circle = circles[id];
       if (!circle) {
-        circle = {
+        circle = circles[id] = {
           x: Math.random() * 0.8 + 0.1,
           y: Math.random() * 0.8 + 0.1,
           color: colors[Math.floor(Math.random() * colors.length)]
