@@ -474,7 +474,6 @@ angular.module('syncspin', [
 
     socket.on('count', function(roomCount) {
       if ($scope.room.id !== roomCount.room) {
-        console.log($scope.room.id + ' !== ' + roomCount.room);
         return;
       }
       $scope.room.count = roomCount.count;
