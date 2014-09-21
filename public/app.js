@@ -54,6 +54,7 @@ angular.module('syncspin', [
     $http.get('/api/' + $stateParams.roomId).success(function(data) {
       $scope.room = data;
       $scope.room.count = 0;
+      $scope.sentence = data.sentence;
       if ($scope.room.songs.length > 0) {
         playNextSong();
       }
@@ -218,6 +219,11 @@ angular.module('syncspin', [
 
     $scope.generatePlaylist = function() {
       var s = $scope.sentence; // Get sentence
+      // dafuq this doesnt need to be realtime yolo
+      socket.emit('setSentence', {
+        room: $scope.room.id,
+        sentence: s
+      });
       updatePlaylist(s);
     };
 

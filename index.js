@@ -18,7 +18,8 @@ function getRoom(roomId) {
       id: roomId,
       songs: [],
       nodes: [],
-      playedSongs: []
+      playedSongs: [],
+      sentence: {}
     };
   }
 
@@ -44,6 +45,10 @@ app.route('/*').get(function(req, res) {
 
 io.on('connection', function(socket) {
 
+  socket.on('setSentence', function(setSentence) {
+    getRoom(setSentence.room).sentence = setSentence.sentence;
+  });
+
   socket.on('vote', function(vote) {
     var song;
     var songs = getRoom(vote.room).songs;
@@ -67,8 +72,8 @@ io.on('connection', function(socket) {
       return user.room === room.id;
     }).length;
     rooms[room.id].nodes.push({
-        "name":"user"+user.id,
-        "group": Math.floor(Math.random() * userCt)
+      "name": "user" + user.id,
+      "group": Math.floor(Math.random() * userCt)
     });
     io.emit('count', {
       room: room.id,
