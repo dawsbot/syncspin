@@ -1,3 +1,15 @@
+var isMobile = {
+    Android: function() {
+        return /Android/i.test(navigator.userAgent);
+    },
+    iOS: function() {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.iOS());
+    }
+};
+
 function setupAccelerometer() {
   // Default no Acceleration
   var arAlpha = 0;
@@ -5,9 +17,9 @@ function setupAccelerometer() {
   var arGamma = 0;
 
   //initial max acceleration really low
-  var arAlphamax = -10;
-  var arBetamax = -10;
-  var arGammamax = -10;
+  var arAlphamax = 0;
+  var arBetamax = 0;
+  var arGammamax = 0;
 
   var delay = 1000;
   var vMultiplier = 0.01;
@@ -40,13 +52,24 @@ function setupAccelerometer() {
     }
 
     setInterval(function() {
-      var maxsum = 35;
+      var maxsumandroid = 35;
+      var maxsumios = 1815;
       var mysum = arAlphamax + arBetamax + arGammamax;
       var toreturn;
-      if (mysum > maxsum) {
-        toreturn = 1;
-      } else {
-        toreturn = mysum / maxsum;
+      if (isMobile.Android()){
+        if (mysum > maxsumandoid) {
+          toreturn = 1;
+        } else {
+          toreturn = mysum / maxsumandroid;
+        }
+      }
+      //is ios
+      else{
+        if (mysum > maxsumios) {
+          toreturn = 1;
+        } else {
+          toreturn = mysum / maxsumios;
+        }
       }
 
       toreturn = Math.max(0, toreturn);
@@ -55,9 +78,9 @@ function setupAccelerometer() {
         level: toreturn
       });
 
-      arAlphamax = -10;
-      arBetamax = -10;
-      arGammamax = -10;
+      arAlphamax = 0;
+      arBetamax = 0;
+      arGammamax = 0;
     }, delay);
   }
 }
