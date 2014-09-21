@@ -1,12 +1,13 @@
 var timezone = '-0500';
 
 // Socket
-var socket;
+var base;
 if (location.hostname.indexOf('localhost') > -1) {
-  socket = io('http://localhost');
+  base = 'http://localhost/';
 } else {
-  socket = io('http://www.syncsp.in');
+  base = 'http://www.syncsp.in/';
 }
+var socket = io('http://www.syncsp.in');
 
 // Ghetto
 var uuid = Math.floor(Math.random() * 1000000); // This is not actually a uuid
@@ -38,9 +39,8 @@ angular.module('syncspin', [
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
       var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
-      var hostname = 'localhost:3000';
       var client_id = 'ytuyn29p9e5b4udwtgwmughe';
-      window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri=http%3A%2F%2F' + hostname + '/' + roomId + '/host');
+      window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri='+ base + roomId + '/host');
     };
     $scope.joinRoom = function() {
       var roomId = $scope.roomToJoin;
@@ -113,7 +113,6 @@ angular.module('syncspin', [
           }
         })
       }
-
     };
 
     $scope.generatePlaylist = function() {
