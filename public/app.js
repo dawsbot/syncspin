@@ -77,7 +77,7 @@ angular.module('syncspin', [
     $scope.playing = {};
 
     // Audio stuff
-    var bam = $scope.bam = new BeatsAudioManager('SyncSpin');
+    var bam = window.theBam = $scope.bam = new BeatsAudioManager('SyncSpin');
 
     bam.on('error', function(value) {
       console.log('Error: ' + value);
