@@ -7,6 +7,18 @@
 .song {
   margin: 10px 0px;
 }
+.landingwrapper{
+    margin: 15% 0px;
+}
+.img{
+    margin: auto auto;
+    width: 50%;
+    height: auto;
+}
+.img img{
+    width: 100%;
+    height: auto;
+}
 .album-artwork {
   height: auto;
   width: 100%;
