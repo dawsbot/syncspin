@@ -115,9 +115,14 @@ io.on('connection', function(socket) {
   var digest = {};
   socket.on('activity', function(activity) {
     console.log('Received activity level of ' + activity.level + ' from ' + socket.id + '.');
+    var user = users[socket.id];
+    if (!user) {
+      console.log(users);
+      return;
+    }
     digest[socket.id] = {
       level: activity.level,
-      room: users[socket.id].room
+      room: user.room
     };
   });
   setInterval(function() {
