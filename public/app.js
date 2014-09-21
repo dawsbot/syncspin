@@ -38,7 +38,7 @@ angular.module('syncspin', [
   })
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
-      var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
+      var roomId = animals[Math.floor(Math.random() * animals.length)];
       var client_id = 'ytuyn29p9e5b4udwtgwmughe';
       window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri=' + base + roomId + '/host');
     };
@@ -686,6 +686,6 @@ angular.module('syncspin', [
         song.vote = -1;
       }
     };
-    
+
     setupAccelerometer();
   });

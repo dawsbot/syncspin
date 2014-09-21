@@ -3,7 +3,6 @@ var initVised = false;
 function setupVis() {
   var width = '100%';
   var height = 500;
-  console.log('asdf');
 
   var i = 0;
 
