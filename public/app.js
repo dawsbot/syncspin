@@ -699,13 +699,13 @@ angular.module('syncspin', [
     $scope.searchSong = function() {
       var client_ID = 'ytuyn29p9e5b4udwtgwmughe'
       $http.get(
-        'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + $scope.searchQuery + '&client_id=' + client_ID
+        'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + $scope.searchQuery.replace(' ', '+') + '&client_id=' + client_ID
       ).success(function(data) {
         var rslt = {
-          'sidd': data.data.id,
-          'name': data.data.title,
-          'artist': data.data.artist_display_name,
-          'votes': 0
+          sidd: data.data.id,
+          'name: data.data.title,
+          artist': data.data.artist_display_name,
+          votes: 0
         };
         $scope.room.songs.push(rslt);
       });
