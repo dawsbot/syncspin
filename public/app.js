@@ -5,7 +5,7 @@ var socket;
 if (location.hostname.indexOf('localhost') > -1) {
   socket = io('http://localhost');
 } else {
-  socket = io('http://syncsp.in');
+  socket = io('http://www.syncsp.in');
 }
 
 // Ghetto
