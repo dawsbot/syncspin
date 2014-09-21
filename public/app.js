@@ -69,12 +69,18 @@ angular.module('syncspin', [
 
     bam.on('ended', playNextSong);
 
+    $scope.controls = {
+      next: function() {
+        playNextSong();
+      }
+    };
+
     function playNextSong() {
       if ($scope.room.songs.length < 5) {
         getSentence($scope.sentence);
       }
 
-      bam.on('ready', function() {
+      var run = function() {
         bam.clientId = 'ytuyn29p9e5b4udwtgwmughe';
         bam.authentication = {
           access_token: getToken(),
@@ -90,7 +96,14 @@ angular.module('syncspin', [
         bam.identifier = nextId;
         bam.load();
         $scope.$apply();
-      });
+      };
+
+      console.log(bam);
+      if (bam.readyState === 0) {
+        bam.on('ready', run);
+      } else {
+        run();
+      }
     };
 
     // PLAYLIST CRAP
