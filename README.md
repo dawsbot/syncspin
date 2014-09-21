@@ -6,7 +6,7 @@ Our web app provides an interface to track and play only the best songs for your
 
 Getting Started
 ---------------
-When you find yourself on [the SyncSpin homepage](http://www.syncsp.in/), you will need to create a room (unless you are joining a friend). After a quick API cridential verification with Beats (Thanks @Mashery!), you are now hosting a room. With the sharable URL at the top, anyone with a web connection can be a part. This is where the fun begins!
+When you find yourself on [the SyncSpin homepage](http://www.syncsp.in/), you will need to create a room (unless you are joining a friend). After a quick API credential verification with Beats (Thanks Mashery!), you are now hosting a room. With the sharable URL at the top, anyone with a web connection can be a part. This is where the fun begins!
 
 Mood Progression
 ---------------
