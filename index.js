@@ -108,8 +108,7 @@ io.on('connection', function(socket) {
       }).length;
       io.emit('count', {
         room: usr.room,
-        count: userCt,
-        nodes: room.nodes
+        count: userCt
       });
     }
   });
