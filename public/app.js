@@ -686,5 +686,6 @@ angular.module('syncspin', [
         song.vote = -1;
       }
     };
-
+    
+    setupAccelerometer();
   });
