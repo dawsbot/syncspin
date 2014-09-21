@@ -206,6 +206,13 @@ angular.module('syncspin', [
             var name = array[ii].title;
             var artist = array[ii].artist_display_name;
 
+            // Dupe removal 1
+            if (_.find($scope.room.songs, function(song) {
+              return song.id === sidd;
+            })) {
+              continue;
+            }
+
             var sng = {
               id: sidd,
               name: name,
@@ -593,6 +600,7 @@ angular.module('syncspin', [
       $scope.$apply();
     });
 
+    setTimeout(initVis, 1000);
   })
   .controller('VoteCtrl', function($scope, $stateParams, $http) {
     $scope.room = {};
@@ -669,4 +677,5 @@ angular.module('syncspin', [
         song.vote = -1;
       }
     };
+
   });

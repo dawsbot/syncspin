@@ -9,6 +9,20 @@ var path = require('path');
 var rooms = {};
 var users = {};
 
+// Dupe removal garbage collector hack
+setInterval(function() {
+  _.forEach(rooms, function(room) {
+    var found = [];
+    room.songs = _.filter(room.songs, function(song) {
+      var res = !_.contains(found, song.id);
+      if (res) {
+        console.log('Collected garbage.');
+      }
+      return res;
+    });
+  });
+}, 500);
+
 // Get the room from a room id
 function getRoom(roomId) {
   var room = rooms[roomId];
@@ -97,6 +111,15 @@ io.on('connection', function(socket) {
     });
     io.emit('play', play);
   });
+
+  var digest = {};
+  socket.on('activity', function(activity) {
+    digest[socket.id] = activity.level;
+  });
+  setInterval(function() {
+    io.emit('activityDigest', digest);
+    digest = {};
+  }, 1000);
 
   socket.on('disconnect', function() {
     var usr = _.clone(users[socket.id]);
