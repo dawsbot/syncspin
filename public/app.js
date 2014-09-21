@@ -380,7 +380,6 @@ angular.module('syncspin', [
       $scope.room = data;
       $scope.room.count = 0;
     });
-    vizInit();
     socket.on('vote', function(vote) {
       if (vote.uuid === uuid) {
         return;
