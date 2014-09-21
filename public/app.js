@@ -69,7 +69,9 @@ angular.module('syncspin', [
       $scope.sentence = data.sentence;
       if ($scope.room.songs.length > 0) {
         playNextSong();
-        setTimeout(initVis, 1000);
+        setTimeout(function() {
+          initVis($scope.room.id);
+        }, 1000);
       }
     });
     $scope.playing = {};
@@ -136,8 +138,7 @@ angular.module('syncspin', [
         });
 
         setInterval(function() {
-          initVis();
-          console.log('HELLYEA');
+          initVis($scope.room.id);
         }, 1000);
         $scope.room.playedSongs.push(nextId);
         bam.identifier = nextId;

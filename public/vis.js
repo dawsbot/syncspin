@@ -1,8 +1,10 @@
 var initVised = false;
+var theRoom;
 
 var colors = ['#AE81FF', '#E6DB74', '#66D9EF', '#465457'];
 
-function initVis() {
+function initVis(room) {
+  theRoom = room;
   if (initVised) {
     return;
   }
@@ -42,6 +44,10 @@ function initVis() {
 
   function digestHandler(digest) {
     _.forEach(digest, function(val, id) {
+      if (val.room !== theRoom) {
+        return;
+      }
+
       var circle = circles[id];
       if (!circle) {
         circle = circles[id] = {
