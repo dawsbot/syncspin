@@ -224,6 +224,12 @@ angular.module('syncspin', [
             var name = array[ii].title;
             var artist = array[ii].artist_display_name;
 
+            if (_.filter($scope.room.songs, function(x) {
+              return x.id === sidd;
+            }).length > 0) {
+              continue;
+            }
+
             var sng = {
               id: sidd,
               name: name,
