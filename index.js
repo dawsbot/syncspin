@@ -16,7 +16,7 @@ setInterval(function() {
     room.songs = _.filter(room.songs, function(song) {
       var res = !_.contains(found, song.id);
       if (res) {
-        console.log('Collected garbage.');
+        // collected garbage
       }
       return res;
     });
@@ -114,6 +114,7 @@ io.on('connection', function(socket) {
 
   var digest = {};
   socket.on('activity', function(activity) {
+    console.log('Received activity level of ' + activity.level + ' from ' + socket.id + '.');
     digest[socket.id] = activity.level;
   });
   setInterval(function() {
