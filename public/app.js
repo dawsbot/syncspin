@@ -701,12 +701,22 @@ angular.module('syncspin', [
       $http.get(
         'https://partner.api.beatsmusic.com/v1/api/search?type=track&q=' + $scope.searchQuery.replace(/ /g, '+') + '&client_id=' + client_ID
       ).success(function(data) {
+        var name = data.data.title;
+        var artist = data.data.artist_display_name;
         var rslt = {
           sidd: data.data.id,
-          name: data.data.title,
-          artist: data.data.artist_display_name,
+          name: name,
+          artist: artist,
           votes: 0
         };
+
+        $http.get('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=4715e5e59b0d1f7153025ed7e0ccc627&artist=' + artist + '&track=' + name + '&format=json')
+          .success(function(data) {
+            try {
+              rslt.artwork = data.track.album.image[2]['#text'];
+            } catch (e) {}
+          });
+
         console.log(rslt);
         $scope.room.songs.push(rslt);
       });
