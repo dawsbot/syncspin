@@ -54,7 +54,7 @@ angular.module('syncspin', [
       }
       for (var i = 0; i < newSongs.songs.length; i++) {
         var sgg = newSongs.songs[i];
-        $scope.songs.push(newSongs.songs[i]);
+        $scope.room.songs.push(newSongs.songs[i]);
         $scope.$apply();
       }
     });
