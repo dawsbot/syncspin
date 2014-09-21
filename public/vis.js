@@ -68,12 +68,12 @@ function initVis(room) {
         circle = circles[id] = {
           x: Math.random() * 0.8 + 0.1,
           y: Math.random() * 0.8 + 0.1,
-          color: colors[Math.floor(Math.random() * colors.length)]
+          color: colors[Math.floor(Math.random() * colors.length)],
+          duration: 1000
         };
       }
 
-      var opts = _.clone(circle);
-      opts.duration = 1000;
+      console.log(id + ': ' + val.level);
 
       var scaled = Math.floor(val.level * 10);
       var freq = 1000 / scaled;
