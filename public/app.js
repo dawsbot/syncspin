@@ -89,6 +89,7 @@ angular.module('syncspin', [
     function playNextSong() {
       if ($scope.room.songs.length < 5) {
         updatePlaylist($scope.sentence);
+        console.log('should update');
       }
 
       var run = function() {
@@ -571,23 +572,6 @@ angular.module('syncspin', [
       $scope.$apply();
     });
 
-  })
-  .controller('RoomsCtrl', function($scope, $stateParams, $http) {
-    $http.get('/api/rooms').success(function(data) {
-      $scope.rooms = data;
-    });
-    socket.on('vote', function(vote) {
-      if (vote.uuid === uuid) {
-        return;
-      }
-      var songs = $scope.room.songs;
-      for (var i = 0; i < songs.length; i++) {
-        if (songs[i].id === vote.id) {
-          songs[i].votes += vote.change;
-        }
-      }
-      $scope.$apply();
-    });
   })
   .controller('VoteCtrl', function($scope, $stateParams, $http) {
     $scope.room = {};
