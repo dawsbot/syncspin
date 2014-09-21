@@ -13,6 +13,7 @@
     <input id="sentencePeople" placeholder="People" class="form-control sentence-part" type="text" ng-model="sentence.people" typeahead="people.display for people in options.people | filter:$viewValue | limitTo:8" />
     <h2>to</h2>
     <input id="sentenceGenre" placeholder="Genre" class="form-control sentence-part" type="text" ng-model="sentence.genre" typeahead="genre.display for genre in options.genres | filter:$viewValue | limitTo:8" />
+    <button class="btn btn-primary" ng-click="generatePlaylist()">Generate Playlist</button>
   </div>
   <div ng-if="room.songs.length != 0">
     <div class="row">

@@ -1,3 +1,5 @@
+var timezone = '-0500';
+
 // Socket
 var socket;
 if (location.hostname.indexOf('localhost') > -1) {
@@ -36,14 +38,85 @@ angular.module('syncspin', [
   .controller('CreateCtrl', function($scope, $location) {
     $scope.createRoom = function() {
       var roomId = colors[Math.floor(Math.random() * colors.length)] + '-' + landforms[Math.floor(Math.random() * landforms.length)]
-      $location.url('/' + roomId + '/host');
+      var hostname = 'localhost:3000';
+      var client_id = 'ytuyn29p9e5b4udwtgwmughe';
+      window.location = ('https://partner.api.beatsmusic.com/v1/oauth2/authorize?state=xyz]&response_type=token&client_id=' + client_id + '&redirect_uri=http%3A%2F%2F' + hostname + '/' + roomId + '/host');
     };
     $scope.joinRoom = function() {
       var roomId = $scope.roomToJoin;
       $location.url('/' + roomId);
     };
   })
-  .controller('HostCtrl', function($scope, $stateParams, $http) {
+  .controller('HostCtrl', function($scope, $stateParams, $http, $location) {
+
+    // PLAYLIST CRAP
+    function getToken() {
+      return $location.search().access_token;
+    }
+
+    function getSentence(sentence) {
+      var token = getToken();
+      $http({
+        url: 'https://partner.api.beatsmusic.com/v1/api/me',
+        type: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }).success(function(data) {
+        console.log(data);
+        playlistHolder.initPlaylist(data.result.user_context, sentence);
+      });
+    }
+
+    var playlistHolder = {
+      initPlaylist: function(user_id, sentence) {
+        function idOf(type, display) {
+          return _.find($scope.options[type], function(opt) {
+            return opt.display === display;
+          }).id;
+        }
+
+        var place = idOf('places', sentence.place);
+        var activity = idOf('activities', sentence.activity);
+        var people = idOf('people', sentence.people);
+        var genre = idOf('genres', sentence.genre);
+
+        var token = getToken();
+
+        $http.post(
+          'https://partner.api.beatsmusic.com/v1/api/users/' + user_id + '/recs/the_sentence?place=' + place + '&activity=' + activity + '&people=' + people + '&genre=' + genre + '&time_zone=' + timezone + '&access_token=' + token
+        ).success(function(data) {
+          playlistHolder.addToPlaylist(data.data);
+        });
+      },
+      addToPlaylist: function(array) {
+        for (ii = 0; ii < array.length; ii++) {
+          $scope.room.songs.push({
+            id: array[ii].id,
+            name: array[ii].title,
+            artist: array[ii].artist_display_name,
+            votes: 0
+          });
+        }
+        console.log(playlistHolder);
+      },
+      syncPlaylists: function(room_id) {
+        $.ajax({
+          type: "POST",
+          url: 'https://syncsp.in/' + room_id + '/sync',
+          dataType: 'json',
+          success: function(data) {
+            //data handling here
+          }
+        })
+      }
+
+    };
+
+    $scope.generatePlaylist = function() {
+      var s = $scope.sentence; // Get sentence
+      getSentence(s);
+    };
 
     $scope.sentence = {};
 

@@ -142,12 +142,12 @@ var playlistHolder = {
                                     });
       }
       console.log(playlistHolder);   
-  }
+  },
   syncPlaylists: function(room_id) {
     $.ajax({
       type: "POST",
-      url: 'https://syncsp.in/'+room_id+'/sync'
-      dataType: 'json'
+      url: 'https://syncsp.in/'+room_id+'/sync',
+      dataType: 'json',
       success : function(data) {
         //data handling here
       }
