@@ -113,6 +113,12 @@ angular.module('syncspin', [
         $scope.playing = nextup;
 
         var nextId = nextup.id;
+
+        socket.emit('play', {
+          room: $scope.room.id,
+          song: nextId
+        });
+
         $scope.room.playedSongs.push(nextId);
         bam.identifier = nextId;
         bam.load();
@@ -586,6 +592,13 @@ angular.module('syncspin', [
           songs[i].votes += vote.change;
         }
       }
+      $scope.$apply();
+    });
+
+    socket.on('play', function(play) {
+      $scope.room.songs = _.filter($scope.room.songs, function(song) {
+        return song.id !== play.song;
+      });
       $scope.$apply();
     });
 
