@@ -2,15 +2,19 @@ SyncSpin
 ========
 SyncSpin - Where the whole party has a voice, but no one has to shout.
 
-Our web app provides an interface to track and play only the best songs for your next get together. We built a system just for you so that your party will DJ itself through the input of your loyal friends. There are no apps or downloads to SyncSpin either, we took care of that by leveraging the latest in cross-platform cloud technologies.
-
-Getting Started
+Syncspin is a democratic DJ music streaming application.
 ---------------
-When you find yourself on [the SyncSpin homepage](http://www.syncsp.in/), you will need to create a room (unless you are joining a friend). After a quick API credential verification with Beats (Thanks Mashery!), you are now hosting a room. With the sharable URL at the top, anyone with a web connection can be a part. This is where the fun begins!
+When you find yourself on [the SyncSpin homepage](http://www.syncsp.in/), get started by clicking "Create Room" (unless you are joining a friend).
+You will then be instructed to connect to your Beats Music account to allow streaming.
+The next page is the "Sentence Builder". The "Sentence" is a unique feature of the Beats Music system that allows one to generate an auto-curated playlist based on factors such as location, mood, and genre.
+After you have built your starter sentence, you will find yourself on the "Room" page.
+At the top of the "Room", there will be a URL that looks like "http://www.syncsp.in/SOME_ANIMAL_HERE". Anyone with an internet connection and modern web browser can now connect to your room via this URL and vote on the next song to be played.
 
-Mood Progression
+
+Visualisation
 ---------------
-So what is so special about this democratic jukebox? You.
-We developed this idea to serve you and mold to your environment. As you move from one song to another, the suggestions sway to the style of the winning songs
+You may notice a "ping" of small circles appear on the main screen when someone connects to the room
+This ping is a visualizer of all devices connected to the playback server.
+Try shaking your smartphone or tablet while it is connected to a room and see what happens...
 
-To demonstrate moods even better, I would encourage you to join one of our live rooms during a demonstration. You will immediately notice at least one pulsing ring on your screen. We use this as a symbol of you - and a symbol of your personality. Take your phone and move it around. Notice your ring brighten up and flicker faster? That is our crowd mood analytic system at work. 
+We hope you enjoy syncsp.in as much as we do. Happy jammin'!
