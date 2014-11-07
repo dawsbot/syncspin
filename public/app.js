@@ -137,7 +137,7 @@ var base;
 if (location.hostname === 'localhost') {
   base = 'http://localhost:3000/';
 } else {
-  base = 'http://www.syncsp.in/';
+  base = 'http://syncsp.in/';
 }
 var socket = io(base);
 
